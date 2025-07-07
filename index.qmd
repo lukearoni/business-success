@@ -49,19 +49,6 @@ summary(model)
 ```
 
 ```{r}
-ggplot(bds2022, aes(x = estabs_entry_rate, y = estabs_exit_rate, label = msa)) +
-  geom_point(color = "#1f78b4", size = 3) +
-  geom_smooth(method = "lm", color = "#e31a1c", se = TRUE) +
-  ggrepel::geom_text_repel(data = subset(bds2022, estabs_exit_rate > 15 | estabs_entry_rate > 15)) +
-  labs(
-    title = "Startup vs. Exit Rates by Metro Area",
-    x = "Startup Rate (%)",
-    y = "Exit Rate (%)"
-  ) +
-  theme_minimal()
-```
-
-```{r}
 # Load crosswalk file
 msa_names <- read_csv("list1_2020.csv") %>%
   clean_names() %>%
@@ -74,28 +61,29 @@ msa_names <- read_csv("list1_2020.csv") %>%
 bds2022 <- bds2022 %>%
   mutate(msa = as.character(msa)) %>%
   left_join(msa_names, by = c("msa" = "cbsa_code")) %>%
-  select(msa_name, everything()) %>%
-  drop_na(msa_name)  # removes unmatched rows (non-metro or errors)
+  select(msa_name, everything())
 ```
 
 ```{r}
 bds_rates <- bds2022 %>%
   mutate(
-    startup_rate_raw = estabs_entry / estabs * 100,  # % of establishments that are new
-    exit_rate_raw = estabs_exit / estabs * 100       # % of establishments that exited
+    startup_rate_raw = estabs_entry_rate,
+    exit_rate_raw = estabs_exit_rate
   )
 ```
 
 ```{r}
-bds_rates %>%
-  slice_max(startup_rate_raw, n = 20) %>%
-  ggplot(aes(x = reorder(msa_name, startup_rate_raw), y = startup_rate_raw)) +
+bds2022 |>
+  slice_max(order_by = estabs_entry_rate, n = 20) |>
+  mutate(rank = row_number()) |>
+  ggplot(aes(x = factor(rank, levels = rev(1:20)), y = estabs_entry_rate)) +
+  coord_flip() + 
   geom_col(fill = "#1f78b4") +
-  coord_flip() +
+  geom_text(aes(label = round(estabs_entry_rate, 1)), vjust = -0.5, size = 3) +
   labs(
     title = "Top 20 Metro Areas by Startup Rate (2022)",
     subtitle = "Share of new establishments out of total existing establishments",
-    x = NULL,
+    x = "Rank",
     y = "Startup Rate (%)",
     caption = "Source: U.S. Census Bureau BDS 2022"
   ) +
@@ -103,33 +91,16 @@ bds_rates %>%
 ```
 
 ```{r}
-bds_rates %>%
-  slice_max(startup_rate_raw, n = 20) %>%
-  arrange(desc(startup_rate_raw)) %>%  # sort manually
-  ggplot(aes(x = msa_name, y = startup_rate_raw)) +
+bds2022 |>
+  slice_max(order_by = estabs_entry_rate, n = 20) |>
+  ggplot(aes(y = msa_name, x = estabs_entry_rate)) +
   geom_col(fill = "#1f78b4") +
-  coord_flip() +
+  geom_text(aes(label = round(estabs_entry_rate, 1)), vjust = -0.5, size = 3) +
   labs(
     title = "Top 20 Metro Areas by Startup Rate (2022)",
     subtitle = "Share of new establishments out of total existing establishments",
-    x = NULL,
+    x = "Rank",
     y = "Startup Rate (%)",
-    caption = "Source: U.S. Census Bureau BDS 2022"
-  ) +
-  theme_minimal()
-```
-
-```{r}
-bds_rates %>%
-  slice_max(exit_rate_raw, n = 20) %>%
-  ggplot(aes(x = reorder(msa_name, exit_rate_raw), y = exit_rate_raw)) +
-  geom_col(fill = "#e31a1c") +
-  coord_flip() +
-  labs(
-    title = "Top 20 Metro Areas by Exit Rate (2022)",
-    subtitle = "Share of exiting establishments out of total existing establishments",
-    x = NULL,
-    y = "Exit Rate (%)",
     caption = "Source: U.S. Census Bureau BDS 2022"
   ) +
   theme_minimal()

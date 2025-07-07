@@ -1,0 +1,53 @@
+---
+title: "Untitled"
+format: html
+execute:
+    echo: false
+    message: false
+    warning: false
+---
+```{r}
+library(tidyverse)
+library(tidycensus)
+library(janitor)
+```
+
+```{r}
+bds2022 <- read_csv("bds2022_msa.csv") %>%
+  clean_names() %>%
+  filter(year == 2022) %>%
+  select(
+    msa,
+    estabs_entry,        
+    estabs_exit,  
+    estabs_entry_rate,  # startup rate
+    estabs_exit_rate,   # business exit rate
+    firms, estabs, emp
+  ) %>%
+  drop_na()
+```
+
+```{r}
+bds_rates <- bds2022 %>%
+  mutate(
+    startup_rate_raw = estabs_entry_rate,
+    exit_rate_raw = estabs_exit_rate
+  )
+```
+
+```{r}
+bds2022 |>
+  slice_max(order_by = estabs_entry_rate, n = 20) |>
+  mutate(rank = row_number()) |>
+  ggplot(aes(x = factor(rank), y = estabs_entry_rate)) +
+  geom_col(fill = "#1f78b4") +
+  geom_text(aes(label = round(estabs_entry_rate, 1)), vjust = -0.5, size = 3) +
+  labs(
+    title = "Top 20 Metro Areas by Startup Rate (2022)",
+    subtitle = "Share of new establishments out of total existing establishments",
+    x = "Rank",
+    y = "Startup Rate (%)",
+    caption = "Source: U.S. Census Bureau BDS 2022"
+  ) +
+  theme_minimal()
+```
