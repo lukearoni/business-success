@@ -1,0 +1,13 @@
+---
+title: "Sources"
+format: html
+execute:
+    echo: false
+    message: false
+    warning: false
+---
+
+[US Census Bureau 2022 Business Dynamics Statistics Dataset (MSA)](https://www.census.gov/data/datasets/time-series/econ/bds/bds-datasets.html)
+[US Census Bureau Metropolitan Area Code and Area Name (Mar. 2020)](https://www.census.gov/geographies/reference-files/time-series/demo/metro-micro/historical-delineation-files.html)
+
+We obtained the data by using the US Census Bureau Datasets. From those datasets, we converted them to csv files and added them to the project. We did not have to wrangle the data much, only changing column names for ease of use as well as eliminating duplicate data. We also dropped data that had any not available information.

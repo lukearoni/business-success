@@ -47,11 +47,12 @@ bds2022 <- bds2022 %>%
 ```
 
 ```{r}
+#| eval: false
+#| echo: false
 bds2022 |>
   distinct() |> 
 ggplot(aes(x = estabs_entry_rate, y = estabs_exit_rate, label = msa_name)) +
   geom_point(color = "#1f78b4", alpha = 0.7, size = 3) +
-  geom_smooth(method = "lm", color = "#e31a1c", se = TRUE) +
   ggrepel::geom_text_repel(data = subset(bds2022, estabs_entry_rate > 20)) +
   labs(
     title = "Do Metro Areas With More Startups See Lower Exit Rates?",
@@ -61,11 +62,6 @@ ggplot(aes(x = estabs_entry_rate, y = estabs_exit_rate, label = msa_name)) +
     caption = "Source: U.S. Census Bureau BDS 2022"
   ) +
   theme_minimal()
-```
-
-```{r}
-model <- lm(estabs_exit_rate ~ estabs_entry_rate, data = bds2022)
-summary(model)
 ```
 
 ```{r}
@@ -103,4 +99,4 @@ labs(
   )
 ```
 
-Starting a business is a large and risky ambition that comes with the potential reward of vast wealth. However, not all places are a conducive environment for entrepeneurship. We obtained a dataset containing business dynamics data from the US Census Bureau, including the 2022 establishment entry and exit rates for each metropolitan area. This records the number of new shops, startups, or franchise buildings divided by the total number of establishments in that area during 2022. We modeled a bar chart showing the top 20 highest establishment entry rates, showing both the rate and area name. As shown by the graph, Wyoming's Sheridan has the best rate by far, indicating that it was a growing hotspot for new businesses during 2022. This may contradict the popular idea that high population areas such as New York or California having the most startups, but it also may fail to account for digital ventures.
+Establishment entry rates vary amongst different metropolitan areas. We obtained a dataset containing business dynamics data from the US Census Bureau, including the 2022 establishment entry and exit rates for each metropolitan area. This records the number of new shops, startups, or franchise buildings divided by the total number of establishments in that area during 2022. We seek to use this data to find the metropolitan areas with the highest rate. Sheridan, Wyoming is a high outlier for establishment entry rates, with an over 6% increase from the second highest, while the rest of the top 20 metropolitan area entry rates don't differ by more than 2.2%.upd
