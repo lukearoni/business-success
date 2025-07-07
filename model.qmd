@@ -1,5 +1,5 @@
 ---
-title: "Mathematical Model"
+title: "Mathematical Models"
 format: html
 execute:
     echo: false
@@ -84,3 +84,7 @@ $$
 $$
 \text{job\_creation\_rate\_births}_i = \beta_0 + \beta_1 \cdot \text{estabs\_entry\_rate}_i + \epsilon_i
 $$
+
+The first model examines the relationship between the net job creation rate and the establishment entry rate. It is specified as a simple linear regression where the net job creation rate for observation 𝑖 is modeled as a function of a constant intercept term  $\beta_0$, the establishment entry rate multiplied by its slope coefficient $\beta_1$, and a random error term $\epsilon_i$, capturing unexplained variation. This model quantifies how changes in the rate at which new establishments enter the market are associated with overall net changes in employment within a state or region.
+
+The second model similarly uses a linear regression framework to relate the job creation rate from births to the establishment entry rate. Here, the dependent variable is the job creation rate attributed specifically to new business births, modeled as a linear function of the establishment entry rate, an intercept, and a random error term. Both models assume linearity and normally distributed residuals, providing a basis to estimate and test the statistical significance of the association between business entry dynamics and employment growth.

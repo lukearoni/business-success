@@ -1,5 +1,5 @@
 ---
-title: "New Businesses"
+title: "New Businesses in Different Areas"
 subtitle: "Comparing Establishment Entry Rates in Different Metropolitan Areas"
 author: Luke Li
 execute:
