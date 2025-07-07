@@ -30,25 +30,6 @@ bds2022 <- read_csv("bds2022_msa.csv") %>%
 ```
 
 ```{r}
-ggplot(bds2022, aes(x = estabs_entry_rate, y = estabs_exit_rate)) +
-  geom_point(color = "#1f78b4", alpha = 0.7, size = 3) +
-  geom_smooth(method = "lm", color = "#e31a1c", se = TRUE) +
-  labs(
-    title = "Do Metro Areas With More Startups See Lower Exit Rates?",
-    subtitle = "BDS 2022: Establishment Entry vs. Exit Rates by MSA",
-    x = "Startup Rate (Establishment Entries per 100 Existing)",
-    y = "Exit Rate (Establishment Exits per 100 Existing)",
-    caption = "Source: U.S. Census Bureau BDS 2022"
-  ) +
-  theme_minimal()
-```
-
-```{r}
-model <- lm(estabs_exit_rate ~ estabs_entry_rate, data = bds2022)
-summary(model)
-```
-
-```{r}
 # Load crosswalk file
 msa_names <- read_csv("list1_2020.csv") %>%
   clean_names() %>%
@@ -65,6 +46,26 @@ bds2022 <- bds2022 %>%
 ```
 
 ```{r}
+ggplot(bds2022, aes(x = estabs_entry_rate, y = estabs_exit_rate, label = msa_name)) +
+  geom_point(color = "#1f78b4", alpha = 0.7, size = 3) +
+  geom_smooth(method = "lm", color = "#e31a1c", se = TRUE) +
+  ggrepel::geom_text_repel(data = subset(bds2022, estabs_entry_rate > 20)) +
+  labs(
+    title = "Do Metro Areas With More Startups See Lower Exit Rates?",
+    subtitle = "BDS 2022: Establishment Entry vs. Exit Rates by MSA",
+    x = "Startup Rate (Establishment Entries per 100 Existing)",
+    y = "Exit Rate (Establishment Exits per 100 Existing)",
+    caption = "Source: U.S. Census Bureau BDS 2022"
+  ) +
+  theme_minimal()
+```
+
+```{r}
+model <- lm(estabs_exit_rate ~ estabs_entry_rate, data = bds2022)
+summary(model)
+```
+
+```{r}
 bds_rates <- bds2022 %>%
   mutate(
     startup_rate_raw = estabs_entry_rate,
@@ -72,36 +73,28 @@ bds_rates <- bds2022 %>%
   )
 ```
 
-```{r}
+```{r, fig.width=16, fig.height=8}
 bds2022 |>
   slice_max(order_by = estabs_entry_rate, n = 20) |>
   mutate(rank = row_number()) |>
   ggplot(aes(x = factor(rank, levels = rev(1:20)), y = estabs_entry_rate)) +
   coord_flip() + 
   geom_col(fill = "#1f78b4") +
-  geom_text(aes(label = round(estabs_entry_rate, 1)), vjust = -0.5, size = 3) +
-  labs(
+  geom_text(aes(label = paste0(msa_name, ": ", round(estabs_entry_rate, 1))), 
+          vjust = 0.5, hjust = -0.1, size = 4) +
+scale_y_continuous(limits = c(0, 28)) +
+labs(
     title = "Top 20 Metro Areas by Startup Rate (2022)",
     subtitle = "Share of new establishments out of total existing establishments",
     x = "Rank",
     y = "Startup Rate (%)",
     caption = "Source: U.S. Census Bureau BDS 2022"
   ) +
-  theme_minimal()
-```
-
-```{r}
-bds2022 |>
-  slice_max(order_by = estabs_entry_rate, n = 20) |>
-  ggplot(aes(y = msa_name, x = estabs_entry_rate)) +
-  geom_col(fill = "#1f78b4") +
-  geom_text(aes(label = round(estabs_entry_rate, 1)), vjust = -0.5, size = 3) +
-  labs(
-    title = "Top 20 Metro Areas by Startup Rate (2022)",
-    subtitle = "Share of new establishments out of total existing establishments",
-    x = "Rank",
-    y = "Startup Rate (%)",
-    caption = "Source: U.S. Census Bureau BDS 2022"
-  ) +
-  theme_minimal()
+  theme_minimal() + 
+  theme(
+    plot.title = element_text(size = 16, face = "bold"),
+    plot.subtitle = element_text(size = 12),
+    axis.title = element_text(size = 12),
+    plot.caption = element_text(size = 10)
+  )
 ```
