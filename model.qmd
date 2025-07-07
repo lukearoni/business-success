@@ -23,12 +23,64 @@ bds2022 <- read_csv("bds2022_msa.csv") %>%
     estabs_exit,  
     estabs_entry_rate,  # startup rate
     estabs_exit_rate,   # business exit rate
-    firms, estabs, emp
+    firms, estabs, emp,
+    firmdeath_estabs,
+    job_creation_rate, 
+    net_job_creation_rate,
+    job_creation_rate_births
   ) %>%
   drop_na()
 ```
 
 ```{r}
-model <- lm(estabs_exit_rate ~ estabs_entry_rate, data = bds2022)
-summary(model)
+library(broom)
+library(dplyr)
+library(knitr)
+
+# Fit models
+model1 <- lm(net_job_creation_rate ~ estabs_entry_rate, data = bds2022)
+model2 <- lm(job_creation_rate_births ~ estabs_entry_rate, data = bds2022)
+
+# Function to prettify term names
+pretty_terms <- function(term) {
+  case_when(
+    term == "(Intercept)" ~ "Intercept",
+    term == "estabs_entry_rate" ~ "Establishment Entry Rate",
+    TRUE ~ term
+  )
+}
+
+# Extract tidy summaries with nicer model titles
+tidy_m1 <- broom::tidy(model1) %>%
+  mutate(
+    Model = "Plot 1: Net Job Creation Rate ~ Establishment Entry Rate",
+    Term = pretty_terms(term)
+  ) %>%
+  select(Model, Term, estimate, std.error, statistic, p.value)
+
+tidy_m2 <- broom::tidy(model2) %>%
+  mutate(
+    Model = "Plot 2: Job Creation Rate (Births) ~ Establishment Entry Rate",
+    Term = pretty_terms(term)
+  ) %>%
+  select(Model, Term, estimate, std.error, statistic, p.value)
+
+# Combine results
+all_models <- bind_rows(tidy_m1, tidy_m2)
+
+# Rename columns for display
+colnames(all_models) <- c("Model", "Term", "Estimate", "Std. Error", "t value", "p value")
+
+# Display table
+kable(all_models, digits = 4, caption = "Regression Model Coefficients with Prettified Terms")
 ```
+
+**Model 1** (for plot 1)
+$$
+\text{net\_job\_creation\_rate}_i = \beta_0 + \beta_1 \cdot \text{estabs\_entry\_rate}_i + \epsilon_i
+$$
+
+**Model 2** (for plot 2)
+$$
+\text{job\_creation\_rate\_births}_i = \beta_0 + \beta_1 \cdot \text{estabs\_entry\_rate}_i + \epsilon_i
+$$
