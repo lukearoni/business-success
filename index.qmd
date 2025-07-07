@@ -1,5 +1,6 @@
 ---
-title: "Business Success"
+title: "New Businesses"
+subtitle: "Comparing Establishment Entry Rates in Different Metropolitan Areas"
 author: Luke Li
 execute:
     echo: false
@@ -46,7 +47,9 @@ bds2022 <- bds2022 %>%
 ```
 
 ```{r}
-ggplot(bds2022, aes(x = estabs_entry_rate, y = estabs_exit_rate, label = msa_name)) +
+bds2022 |>
+  distinct() |> 
+ggplot(aes(x = estabs_entry_rate, y = estabs_exit_rate, label = msa_name)) +
   geom_point(color = "#1f78b4", alpha = 0.7, size = 3) +
   geom_smooth(method = "lm", color = "#e31a1c", se = TRUE) +
   ggrepel::geom_text_repel(data = subset(bds2022, estabs_entry_rate > 20)) +
@@ -75,6 +78,7 @@ bds_rates <- bds2022 %>%
 
 ```{r, fig.width=16, fig.height=8}
 bds2022 |>
+  distinct() |> 
   slice_max(order_by = estabs_entry_rate, n = 20) |>
   mutate(rank = row_number()) |>
   ggplot(aes(x = factor(rank, levels = rev(1:20)), y = estabs_entry_rate)) +
@@ -84,17 +88,19 @@ bds2022 |>
           vjust = 0.5, hjust = -0.1, size = 4) +
 scale_y_continuous(limits = c(0, 28)) +
 labs(
-    title = "Top 20 Metro Areas by Startup Rate (2022)",
+    title = "Top 20 Metro Areas by Establishment Entry Rate (2022)",
     subtitle = "Share of new establishments out of total existing establishments",
     x = "Rank",
-    y = "Startup Rate (%)",
+    y = "Entry Rate (%)",
     caption = "Source: U.S. Census Bureau BDS 2022"
   ) +
   theme_minimal() + 
   theme(
-    plot.title = element_text(size = 16, face = "bold"),
-    plot.subtitle = element_text(size = 12),
-    axis.title = element_text(size = 12),
-    plot.caption = element_text(size = 10)
+    plot.title = element_text(size = 24, face = "bold"),
+    plot.subtitle = element_text(size = 20),
+    axis.title = element_text(size = 20),
+    plot.caption = element_text(size = 20)
   )
 ```
+
+Starting a business is a large and risky ambition that comes with the potential reward of vast wealth. However, not all places are a conducive environment for entrepeneurship. We obtained a dataset containing business dynamics data from the US Census Bureau, including the 2022 establishment entry and exit rates for each metropolitan area. This records the number of new shops, startups, or franchise buildings divided by the total number of establishments in that area during 2022. We modeled a bar chart showing the top 20 highest establishment entry rates, showing both the rate and area name. As shown by the graph, Wyoming's Sheridan has the best rate by far, indicating that it was a growing hotspot for new businesses during 2022. This may contradict the popular idea that high population areas such as New York or California having the most startups, but it also may fail to account for digital ventures.

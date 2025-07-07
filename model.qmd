@@ -1,0 +1,34 @@
+---
+title: "Mathematical Model"
+format: html
+execute:
+    echo: false
+    message: false
+    warning: false
+---
+
+```{r}
+library(tidyverse)
+library(tidycensus)
+library(janitor)
+```
+
+```{r}
+bds2022 <- read_csv("bds2022_msa.csv") %>%
+  clean_names() %>%
+  filter(year == 2022) %>%
+  select(
+    msa,
+    estabs_entry,        
+    estabs_exit,  
+    estabs_entry_rate,  # startup rate
+    estabs_exit_rate,   # business exit rate
+    firms, estabs, emp
+  ) %>%
+  drop_na()
+```
+
+```{r}
+model <- lm(estabs_exit_rate ~ estabs_entry_rate, data = bds2022)
+summary(model)
+```
