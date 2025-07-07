@@ -1,0 +1,23 @@
+[
+  {
+    "objectID": "about.html",
+    "href": "about.html",
+    "title": "About",
+    "section": "",
+    "text": "About this site"
+  },
+  {
+    "objectID": "model.html",
+    "href": "model.html",
+    "title": "Mathematical Model",
+    "section": "",
+    "text": "Call:\nlm(formula = estabs_exit_rate ~ estabs_entry_rate, data = bds2022)\n\nResiduals:\n    Min      1Q  Median      3Q     Max \n-4.0735 -0.6613 -0.0146  0.6141  5.3715 \n\nCoefficients:\n                  Estimate Std. Error t value Pr(&gt;|t|)    \n(Intercept)        5.40142    0.17072   31.64   &lt;2e-16 ***\nestabs_entry_rate  0.33578    0.01717   19.56   &lt;2e-16 ***\n---\nSignif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1\n\nResidual standard error: 1.075 on 923 degrees of freedom\nMultiple R-squared:  0.2931,    Adjusted R-squared:  0.2923 \nF-statistic: 382.6 on 1 and 923 DF,  p-value: &lt; 2.2e-16"
+  },
+  {
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "New Businesses",
+    "section": "",
+    "text": "Call:\nlm(formula = estabs_exit_rate ~ estabs_entry_rate, data = bds2022)\n\nResiduals:\n    Min      1Q  Median      3Q     Max \n-4.4042 -0.5337 -0.0048  0.5318  5.0122 \n\nCoefficients:\n                  Estimate Std. Error t value Pr(&gt;|t|)    \n(Intercept)        5.00820    0.11819   42.38   &lt;2e-16 ***\nestabs_entry_rate  0.38976    0.01151   33.85   &lt;2e-16 ***\n---\nSignif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1\n\nResidual standard error: 0.9659 on 1820 degrees of freedom\nMultiple R-squared:  0.3864,    Adjusted R-squared:  0.386 \nF-statistic:  1146 on 1 and 1820 DF,  p-value: &lt; 2.2e-16\n\n\n\n\n\n\n\n\n\n\n\nStarting a business is a large and risky ambition that comes with the potential reward of vast wealth. However, not all places are a conducive environment for entrepeneurship. We obtained a dataset containing business dynamics data from the US Census Bureau, including the 2022 establishment entry and exit rates for each metropolitan area. This records the number of new shops, startups, or franchise buildings divided by the total number of establishments in that area during 2022. We modeled a bar chart showing the top 20 highest establishment entry rates, showing both the rate and area name. As shown by the graph, Wyoming’s Sheridan has the best rate by far, indicating that it was a growing hotspot for new businesses during 2022. This may contradict the popular idea that high population areas such as New York or California having the most startups, but it also may fail to account for digital ventures."
+  }
+]
