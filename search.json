@@ -9,16 +9,23 @@
   {
     "objectID": "index.html",
     "href": "index.html",
-    "title": "New Businesses",
+    "title": "New Businesses in Different Areas",
     "section": "",
-    "text": "Establishment entry rates vary amongst different metropolitan areas. We obtained a dataset containing business dynamics data from the US Census Bureau, including the 2022 establishment entry and exit rates for each metropolitan area. This records the number of new shops, startups, or franchise buildings divided by the total number of establishments in that area during 2022. We seek to use this data to find the metropolitan areas with the highest rate. Sheridan, Wyoming is a high outlier for establishment entry rates, with an over 6% increase from the second highest, while the rest of the top 20 metropolitan area entry rates don’t differ by more than 2.2%.upd"
+    "text": "Description: Establishment entry rates vary amongst different metropolitan areas. We obtained a dataset containing business dynamics data from the US Census Bureau, including the 2022 establishment entry and exit rates for each metropolitan area. This records the number of new shops, startups, or franchise buildings divided by the total number of establishments in that area during 2022. We seek to use this data to find the metropolitan areas with the highest rate. Sheridan, Wyoming is a high outlier for establishment entry rates, with an over 6% increase from the second highest, while the rest of the top 20 metropolitan area entry rates don’t differ by more than 2.2%."
+  },
+  {
+    "objectID": "index.html#plot",
+    "href": "index.html#plot",
+    "title": "New Businesses in Different Areas",
+    "section": "",
+    "text": "Description: Establishment entry rates vary amongst different metropolitan areas. We obtained a dataset containing business dynamics data from the US Census Bureau, including the 2022 establishment entry and exit rates for each metropolitan area. This records the number of new shops, startups, or franchise buildings divided by the total number of establishments in that area during 2022. We seek to use this data to find the metropolitan areas with the highest rate. Sheridan, Wyoming is a high outlier for establishment entry rates, with an over 6% increase from the second highest, while the rest of the top 20 metropolitan area entry rates don’t differ by more than 2.2%."
   },
   {
     "objectID": "model.html",
     "href": "model.html",
-    "title": "Mathematical Model",
+    "title": "Mathematical Models",
     "section": "",
-    "text": "Call:\nlm(formula = estabs_exit_rate ~ estabs_entry_rate, data = bds2022)\n\nResiduals:\n    Min      1Q  Median      3Q     Max \n-4.0735 -0.6613 -0.0146  0.6141  5.3715 \n\nCoefficients:\n                  Estimate Std. Error t value Pr(&gt;|t|)    \n(Intercept)        5.40142    0.17072   31.64   &lt;2e-16 ***\nestabs_entry_rate  0.33578    0.01717   19.56   &lt;2e-16 ***\n---\nSignif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1\n\nResidual standard error: 1.075 on 923 degrees of freedom\nMultiple R-squared:  0.2931,    Adjusted R-squared:  0.2923 \nF-statistic: 382.6 on 1 and 923 DF,  p-value: &lt; 2.2e-16"
+    "text": "Regression Model Coefficients with Prettified Terms\n\n\n\n\n\n\n\n\n\n\nModel\nTerm\nEstimate\nStd. Error\nt value\np value\n\n\n\n\nPlot 1: Net Job Creation Rate ~ Establishment Entry Rate\nIntercept\n-3.5160\n0.5545\n-6.3408\n0.000\n\n\nPlot 1: Net Job Creation Rate ~ Establishment Entry Rate\nEstablishment Entry Rate\n0.7019\n0.0558\n12.5902\n0.000\n\n\nPlot 2: Job Creation Rate (Births) ~ Establishment Entry Rate\nIntercept\n-0.3006\n0.2323\n-1.2939\n0.196\n\n\nPlot 2: Job Creation Rate (Births) ~ Establishment Entry Rate\nEstablishment Entry Rate\n0.4431\n0.0234\n18.9658\n0.000\n\n\n\n\n\nModel 1 (for plot 1) \\[\n\\text{net\\_job\\_creation\\_rate}_i = \\beta_0 + \\beta_1 \\cdot \\text{estabs\\_entry\\_rate}_i + \\epsilon_i\n\\]\nModel 2 (for plot 2) \\[\n\\text{job\\_creation\\_rate\\_births}_i = \\beta_0 + \\beta_1 \\cdot \\text{estabs\\_entry\\_rate}_i + \\epsilon_i\n\\]\nThe first model examines the relationship between the net job creation rate and the establishment entry rate. It is specified as a simple linear regression where the net job creation rate for observation 𝑖 is modeled as a function of a constant intercept term \\(\\beta_0\\), the establishment entry rate multiplied by its slope coefficient \\(\\beta_1\\), and a random error term \\(\\epsilon_i\\), capturing unexplained variation. This model quantifies how changes in the rate at which new establishments enter the market are associated with overall net changes in employment within a state or region.\nThe second model similarly uses a linear regression framework to relate the job creation rate from births to the establishment entry rate. Here, the dependent variable is the job creation rate attributed specifically to new business births, modeled as a linear function of the establishment entry rate, an intercept, and a random error term. Both models assume linearity and normally distributed residuals, providing a basis to estimate and test the statistical significance of the association between business entry dynamics and employment growth."
   },
   {
     "objectID": "sources.html",

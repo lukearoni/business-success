@@ -1,19 +1,27 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
+    <loc>https://lukearoni.github.io/business-success/test-1.html</loc>
+    <lastmod>2025-07-07T04:54:26.691Z</lastmod>
+  </url>
+  <url>
     <loc>https://lukearoni.github.io/business-success/about.html</loc>
-    <lastmod>2025-07-07T03:00:56.657Z</lastmod>
+    <lastmod>2025-07-07T03:35:31.317Z</lastmod>
   </url>
   <url>
     <loc>https://lukearoni.github.io/business-success/index.html</loc>
-    <lastmod>2025-07-07T03:25:37.665Z</lastmod>
+    <lastmod>2025-07-07T05:25:47.917Z</lastmod>
   </url>
   <url>
     <loc>https://lukearoni.github.io/business-success/model.html</loc>
-    <lastmod>2025-07-07T02:48:45.910Z</lastmod>
+    <lastmod>2025-07-07T05:25:06.328Z</lastmod>
   </url>
   <url>
     <loc>https://lukearoni.github.io/business-success/sources.html</loc>
     <lastmod>2025-07-07T03:09:53.891Z</lastmod>
+  </url>
+  <url>
+    <loc>https://lukearoni.github.io/business-success/index2.html</loc>
+    <lastmod>2025-07-07T05:15:06.019Z</lastmod>
   </url>
 </urlset>

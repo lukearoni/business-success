@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Mathematical Model – Business Success</title>
+<title>Mathematical Models – Business Entry Rates</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -68,6 +68,35 @@ ul.task-list li input[type="checkbox"] {
   }
 }</script>
 
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN") {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
 
 <link rel="stylesheet" href="styles.css">
 </head>
@@ -80,7 +109,7 @@ ul.task-list li input[type="checkbox"] {
       <div class="navbar-container container-fluid">
       <div class="navbar-brand-container mx-auto">
     <a class="navbar-brand" href="./index.html">
-    <span class="navbar-title">Business Success</span>
+    <span class="navbar-title">Business Entry Rates</span>
     </a>
   </div>
             <div id="quarto-search" class="" title="Search"></div>
@@ -91,7 +120,15 @@ ul.task-list li input[type="checkbox"] {
             <ul class="navbar-nav navbar-nav-scroll me-auto">
   <li class="nav-item">
     <a class="nav-link" href="./index.html"> 
-<span class="menu-text">Home</span></a>
+<span class="menu-text">New Businesses in Different Areas</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="./index2.html"> 
+<span class="menu-text">Establishment Entry Rate</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link active" href="./model.html" aria-current="page"> 
+<span class="menu-text">Mathematical Models</span></a>
   </li>  
   <li class="nav-item">
     <a class="nav-link" href="./sources.html"> 
@@ -120,7 +157,7 @@ ul.task-list li input[type="checkbox"] {
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">Mathematical Model</h1>
+<h1 class="title">Mathematical Models</h1>
 </div>
 
 
@@ -138,27 +175,72 @@ ul.task-list li input[type="checkbox"] {
 
 
 <div class="cell">
-<div class="cell-output cell-output-stdout">
-<pre><code>
-Call:
-lm(formula = estabs_exit_rate ~ estabs_entry_rate, data = bds2022)
-
-Residuals:
-    Min      1Q  Median      3Q     Max 
--4.0735 -0.6613 -0.0146  0.6141  5.3715 
-
-Coefficients:
-                  Estimate Std. Error t value Pr(&gt;|t|)    
-(Intercept)        5.40142    0.17072   31.64   &lt;2e-16 ***
-estabs_entry_rate  0.33578    0.01717   19.56   &lt;2e-16 ***
----
-Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
-
-Residual standard error: 1.075 on 923 degrees of freedom
-Multiple R-squared:  0.2931,    Adjusted R-squared:  0.2923 
-F-statistic: 382.6 on 1 and 923 DF,  p-value: &lt; 2.2e-16</code></pre>
+<div class="cell-output-display">
+<table class="caption-top table table-sm table-striped small">
+<caption>Regression Model Coefficients with Prettified Terms</caption>
+<colgroup>
+<col style="width: 50%">
+<col style="width: 20%">
+<col style="width: 7%">
+<col style="width: 8%">
+<col style="width: 6%">
+<col style="width: 6%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;">Model</th>
+<th style="text-align: left;">Term</th>
+<th style="text-align: right;">Estimate</th>
+<th style="text-align: right;">Std. Error</th>
+<th style="text-align: right;">t value</th>
+<th style="text-align: right;">p value</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">Plot 1: Net Job Creation Rate ~ Establishment Entry Rate</td>
+<td style="text-align: left;">Intercept</td>
+<td style="text-align: right;">-3.5160</td>
+<td style="text-align: right;">0.5545</td>
+<td style="text-align: right;">-6.3408</td>
+<td style="text-align: right;">0.000</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Plot 1: Net Job Creation Rate ~ Establishment Entry Rate</td>
+<td style="text-align: left;">Establishment Entry Rate</td>
+<td style="text-align: right;">0.7019</td>
+<td style="text-align: right;">0.0558</td>
+<td style="text-align: right;">12.5902</td>
+<td style="text-align: right;">0.000</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Plot 2: Job Creation Rate (Births) ~ Establishment Entry Rate</td>
+<td style="text-align: left;">Intercept</td>
+<td style="text-align: right;">-0.3006</td>
+<td style="text-align: right;">0.2323</td>
+<td style="text-align: right;">-1.2939</td>
+<td style="text-align: right;">0.196</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Plot 2: Job Creation Rate (Births) ~ Establishment Entry Rate</td>
+<td style="text-align: left;">Establishment Entry Rate</td>
+<td style="text-align: right;">0.4431</td>
+<td style="text-align: right;">0.0234</td>
+<td style="text-align: right;">18.9658</td>
+<td style="text-align: right;">0.000</td>
+</tr>
+</tbody>
+</table>
 </div>
 </div>
+<p><strong>Model 1</strong> (for plot 1) <span class="math display">\[
+\text{net\_job\_creation\_rate}_i = \beta_0 + \beta_1 \cdot \text{estabs\_entry\_rate}_i + \epsilon_i
+\]</span></p>
+<p><strong>Model 2</strong> (for plot 2) <span class="math display">\[
+\text{job\_creation\_rate\_births}_i = \beta_0 + \beta_1 \cdot \text{estabs\_entry\_rate}_i + \epsilon_i
+\]</span></p>
+<p>The first model examines the relationship between the net job creation rate and the establishment entry rate. It is specified as a simple linear regression where the net job creation rate for observation 𝑖 is modeled as a function of a constant intercept term <span class="math inline">\(\beta_0\)</span>, the establishment entry rate multiplied by its slope coefficient <span class="math inline">\(\beta_1\)</span>, and a random error term <span class="math inline">\(\epsilon_i\)</span>, capturing unexplained variation. This model quantifies how changes in the rate at which new establishments enter the market are associated with overall net changes in employment within a state or region.</p>
+<p>The second model similarly uses a linear regression framework to relate the job creation rate from births to the establishment entry rate. Here, the dependent variable is the job creation rate attributed specifically to new business births, modeled as a linear function of the establishment entry rate, an intercept, and a random error term. Both models assume linearity and normally distributed residuals, providing a basis to estimate and test the statistical significance of the association between business entry dynamics and employment growth.</p>
 
 
 
