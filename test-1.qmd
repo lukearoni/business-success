@@ -1,0 +1,70 @@
+---
+title: "Untitled"
+format: html
+execute:
+    echo: false
+    warning: false
+    message: false
+
+---
+
+
+```{r}
+library(tidyverse)
+library(tidycensus)
+library(janitor)
+```
+
+
+```{r}
+bds2022 <- read_csv("bds2022_msa.csv") %>%
+  clean_names() %>%
+  filter(year == 2022) %>%
+  select(
+    msa,
+    estabs_entry,        
+    estabs_exit,  
+    estabs_entry_rate,  # startup rate
+    estabs_exit_rate,   # business exit rate
+    firms, estabs, emp,
+    firmdeath_estabs,
+    job_creation_rate, 
+    net_job_creation_rate,
+    job_creation_rate_births
+  ) %>%
+  drop_na()
+```
+
+```{r}
+library(tidyverse)
+
+plot_data_1 <- bds2022 %>%
+  distinct(estabs_entry_rate, job_creation_rate, .keep_all = TRUE)
+
+p1 <- ggplot(plot_data_1, aes(x = estabs_entry_rate, y = job_creation_rate)) +
+  geom_point(alpha = 0.4) +
+  geom_smooth(method = "lm", color = "blue") +
+  theme_minimal() +
+  labs(title = "Job Creation Rate vs Establishment Entry Rate",
+       x = "Establishment Entry Rate",
+       y = "Job Creation Rate (%)")
+
+# Remove duplicate points for job_creation_rate_births vs net_job_creation_rate
+plot_data <- bds2022 %>%
+  distinct(estabs_entry_rate, job_creation_rate_births, .keep_all = TRUE)
+
+# Scatter plot with regression line
+p2 <- ggplot(plot_data, aes(x = estabs_entry_rate, y = job_creation_rate_births)) +
+  geom_point(alpha = 0.4) +
+  geom_smooth(method = "lm", color = "darkgreen") +
+  theme_minimal() +
+  labs(
+    title = "Establishment Entry Rate vs Job Creation Rate (Births)",
+    x = "Establishment Entry Rate",
+    y = "Job Creation Rate From New Establishments (%)"
+  )
+
+# Display plots
+p1
+p2
+```

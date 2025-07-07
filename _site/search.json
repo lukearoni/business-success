@@ -7,6 +7,13 @@
     "text": "Hi, my name is Luke Li and I am a rising senior at Lexington High School (Year of Graduation 2026).\nGithub: https://github.com/lukearoni\nEmail: lukelex2008@gmail.com\nThis project is about establishment entry rates of different metropolitan areas in the US. Here is the link to the github repository: https://github.com/lukearoni/business-success\nThis project was created as a part of Kane’s Data Science Bootcamp."
   },
   {
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "New Businesses",
+    "section": "",
+    "text": "Description: Establishment entry rates vary amongst different metropolitan areas. We obtained a dataset containing business dynamics data from the US Census Bureau, including the 2022 establishment entry and exit rates for each metropolitan area. This records the number of new shops, startups, or franchise buildings divided by the total number of establishments in that area during 2022. We seek to use this data to find the metropolitan areas with the highest rate. Sheridan, Wyoming is a high outlier for establishment entry rates, with an over 6% increase from the second highest, while the rest of the top 20 metropolitan area entry rates don’t differ by more than 2.2%."
+  },
+  {
     "objectID": "model.html",
     "href": "model.html",
     "title": "Mathematical Model",
@@ -14,17 +21,24 @@
     "text": "Call:\nlm(formula = estabs_exit_rate ~ estabs_entry_rate, data = bds2022)\n\nResiduals:\n    Min      1Q  Median      3Q     Max \n-4.0735 -0.6613 -0.0146  0.6141  5.3715 \n\nCoefficients:\n                  Estimate Std. Error t value Pr(&gt;|t|)    \n(Intercept)        5.40142    0.17072   31.64   &lt;2e-16 ***\nestabs_entry_rate  0.33578    0.01717   19.56   &lt;2e-16 ***\n---\nSignif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1\n\nResidual standard error: 1.075 on 923 degrees of freedom\nMultiple R-squared:  0.2931,    Adjusted R-squared:  0.2923 \nF-statistic: 382.6 on 1 and 923 DF,  p-value: &lt; 2.2e-16"
   },
   {
-    "objectID": "index.html",
-    "href": "index.html",
-    "title": "New Businesses",
-    "section": "",
-    "text": "Establishment entry rates vary amongst different metropolitan areas. We obtained a dataset containing business dynamics data from the US Census Bureau, including the 2022 establishment entry and exit rates for each metropolitan area. This records the number of new shops, startups, or franchise buildings divided by the total number of establishments in that area during 2022. We seek to use this data to find the metropolitan areas with the highest rate. Sheridan, Wyoming is a high outlier for establishment entry rates, with an over 6% increase from the second highest, while the rest of the top 20 metropolitan area entry rates don’t differ by more than 2.2%."
-  },
-  {
     "objectID": "sources.html",
     "href": "sources.html",
     "title": "Sources",
     "section": "",
     "text": "US Census Bureau 2022 Business Dynamics Statistics Dataset (MSA) US Census Bureau Metropolitan Area Code and Area Name (Mar. 2020)\nWe obtained the data by using the US Census Bureau Datasets. From those datasets, we converted them to csv files and added them to the project. We did not have to wrangle the data much, only changing column names for ease of use as well as eliminating duplicate data. We also dropped data that had any not available information."
+  },
+  {
+    "objectID": "index.html#about-this-site",
+    "href": "index.html#about-this-site",
+    "title": "New Businesses",
+    "section": "About This Site",
+    "text": "About This Site\nEstablishment entry rates vary amongst different metropolitan areas. We obtained a dataset containing business dynamics data from the US Census Bureau, including the 2022 establishment entry and exit rates for each metropolitan area. This records the number of new shops, startups, or franchise buildings divided by the total number of establishments in that area during 2022. We seek to use this data to find the metropolitan areas with the highest rate. Sheridan, Wyoming is a high outlier for establishment entry rates, with an over 6% increase from the second highest, while the rest of the top 20 metropolitan area entry rates don’t differ by more than 2.2%.upd"
+  },
+  {
+    "objectID": "index.html#plot",
+    "href": "index.html#plot",
+    "title": "New Businesses",
+    "section": "",
+    "text": "Description: Establishment entry rates vary amongst different metropolitan areas. We obtained a dataset containing business dynamics data from the US Census Bureau, including the 2022 establishment entry and exit rates for each metropolitan area. This records the number of new shops, startups, or franchise buildings divided by the total number of establishments in that area during 2022. We seek to use this data to find the metropolitan areas with the highest rate. Sheridan, Wyoming is a high outlier for establishment entry rates, with an over 6% increase from the second highest, while the rest of the top 20 metropolitan area entry rates don’t differ by more than 2.2%."
   }
 ]
