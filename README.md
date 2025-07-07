@@ -1,3 +1,3 @@
-# business-success
+# Business Entry Rates
 [https://lukearoni.github.io/business-success/](https://lukearoni.github.io/business-success/)
-Establishment entry rates vary amongst different metropolitan areas. We obtained a dataset containing business dynamics data from the US Census Bureau, including the 2022 establishment entry and exit rates for each metropolitan area. This records the number of new shops, startups, or franchise buildings divided by the total number of establishments in that area during 2022. We seek to use this data to find the metropolitan areas with the highest rate. Sheridan, Wyoming is a high outlier for establishment entry rates, with an over 6% increase from the second highest, while the rest of the top 20 metropolitan area entry rates don’t differ by more than 2.2%.
+This project uses US Census Bureau data about Business Dynamics to analyze establishment entry rate in different metropolitan areas and its impact on job creation.
