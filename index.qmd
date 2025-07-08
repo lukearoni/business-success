@@ -1,25 +1,23 @@
 ---
 title: "New Businesses in Different Areas"
 subtitle: "Comparing Establishment Entry Rates in Different Metropolitan Areas"
-author: Luke Li
 execute:
     echo: false
     message: false
     warning: false
 ---
-## Plot
 
 ```{r}
-library(tidyverse)
+library(tidyverse)       # Load things
 library(tidycensus)
 library(janitor)
 ```
 
 ```{r}
-bds2022 <- read_csv("bds2022_msa.csv") %>%
+bds2022 <- read_csv("bds2022_msa.csv") %>%  # Making tibble from dataset, metropolitan area business dynamics dataset
   clean_names() %>%
   filter(year == 2022) %>%
-  select(
+  select(         # Select columns of data to use
     msa,
     estabs_entry,        
     estabs_exit,  
@@ -32,6 +30,7 @@ bds2022 <- read_csv("bds2022_msa.csv") %>%
 
 ```{r}
 # Load crosswalk file
+# Load dataset with metropolitan area names matching to codes
 msa_names <- read_csv("list1_2020.csv") %>%
   clean_names() %>%
   transmute(
@@ -73,14 +72,15 @@ bds_rates <- bds2022 %>%
 ```
 
 ```{r, fig.width=16, fig.height=8}
+# Home page plot
 bds2022 |>
   distinct() |> 
-  slice_max(order_by = estabs_entry_rate, n = 20) |>
-  mutate(rank = row_number()) |>
+  slice_max(order_by = estabs_entry_rate, n = 20) |> # Order by highest rates
+  mutate(rank = row_number()) |> # labeling ranks (did not label by area name because of debugging difficulties; it resulted in incorrect bar lengths)
   ggplot(aes(x = factor(rank, levels = rev(1:20)), y = estabs_entry_rate)) +
   coord_flip() + 
   geom_col(fill = "#1f78b4") +
-  geom_text(aes(label = paste0(msa_name, ": ", round(estabs_entry_rate, 1))), 
+  geom_text(aes(label = paste0(msa_name, ": ", round(estabs_entry_rate, 1))), # Labeling area names after the bars
           vjust = 0.5, hjust = -0.1, size = 4) +
 scale_y_continuous(limits = c(0, 28)) +
 labs(
@@ -99,4 +99,4 @@ labs(
   )
 ```
 
-**Description:** Establishment entry rates vary amongst different metropolitan areas. We obtained a dataset containing business dynamics data from the US Census Bureau, including the 2022 establishment entry and exit rates for each metropolitan area. This records the number of new shops, startups, or franchise buildings divided by the total number of establishments in that area during 2022. We seek to use this data to find the metropolitan areas with the highest rate. Sheridan, Wyoming is a high outlier for establishment entry rates, with an over 6% increase from the second highest, while the rest of the top 20 metropolitan area entry rates don't differ by more than 2.2%.
+Establishment entry rates vary amongst different metropolitan areas. We obtained a dataset containing business dynamics data from the US Census Bureau, including the 2022 establishment entry and exit rates for each metropolitan area. This records the number of new shops, startups, or franchise buildings divided by the total number of establishments in that area during 2022. We seek to use this data to find the metropolitan areas with the highest rate. Sheridan, Wyoming is a high outlier for establishment entry rates, with an over 6% increase from the second highest, while the rest of the top 20 metropolitan area entry rates don't differ by more than 2.2%.
