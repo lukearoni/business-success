@@ -44,7 +44,7 @@ p1 <- ggplot(plot_data_1, aes(x = estabs_entry_rate, y = job_creation_rate)) +
   geom_point(alpha = 0.4) +
   geom_smooth(method = "lm", color = "blue") +
   theme_minimal() +
-  labs(title = "Job Creation Rate vs Establishment Entry Rate",
+  labs(title = "Plot 1: Job Creation Rate vs Establishment Entry Rate",
        x = "Establishment Entry Rate",
        y = "Job Creation Rate (%)")
 
@@ -58,12 +58,13 @@ p2 <- ggplot(plot_data, aes(x = estabs_entry_rate, y = job_creation_rate_births)
   geom_smooth(method = "lm", color = "darkgreen") +
   theme_minimal() +
   labs(
-    title = "Establishment Entry Rate vs Job Creation Rate (Births)",
+    title = "Plot 2: Establishment Entry Rate vs Job Creation Rate (Births)",
     x = "Establishment Entry Rate",
     y = "Job Creation Rate From New Establishments (%)"
   )
+```
 
+```{r}
 # Display plots
-p1
-p2
+p1 + p2
 ```
