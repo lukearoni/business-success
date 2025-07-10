@@ -32,7 +32,7 @@
     "href": "sources.html",
     "title": "Sources",
     "section": "",
-    "text": "US Census Bureau 2022 Business Dynamics Statistics Dataset (MSA) US Census Bureau Metropolitan Area Code and Area Name (Mar. 2020)\nWe obtained the data by using the US Census Bureau Datasets. From those datasets, we converted them to csv files and added them to the project. We did not have to wrangle the data much, only changing column names for ease of use as well as eliminating duplicate data. We also dropped data that had any not available information."
+    "text": "US Census Bureau 2022 Business Dynamics Statistics Dataset (MSA)\nUS Census Bureau Metropolitan Area Code and Area Name (Mar. 2020)\nUS Census Bureau Annual Metropolitan and Micropolitan Statistical Area Resident Population Estimates by Age, Sex, Race, and Hispanic Origin for the United States: April 1, 2020 to July 1, 2024 (CBSA-EST2024-ALLDATA-CHAR)\nUS Census Bureau Building Permits by CBSA 2019 - Present\nAnnual Residential Housing Units Authorized by Building Permits For Wyoming and Counties: 1987 to 2024\nWe obtained the data by using the US Census Bureau Datasets. From those datasets, we converted them to csv files and added them to the project. We did not have to wrangle the data much, only changing column names for ease of use as well as eliminating duplicate data. We also dropped data that had any not available information."
   },
   {
     "objectID": "index.html#explaining-sheridan-wy",
@@ -40,5 +40,12 @@
     "title": "New Businesses in Different Areas",
     "section": "Explaining Sheridan, WY",
     "text": "Explaining Sheridan, WY"
+  },
+  {
+    "objectID": "index2.html",
+    "href": "index2.html",
+    "title": "Establishment Entry Rate",
+    "section": "",
+    "text": "Plot 1\n\n\n\n\n\n\n\n\n\nA linear trend\n\n\nPlot 2"
   }
 ]

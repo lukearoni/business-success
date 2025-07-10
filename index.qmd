@@ -187,7 +187,7 @@ plot_data <- bind_rows(top10, sheridan) %>%
 # Step 7: Plot
 ggplot(plot_data, aes(x = reorder(NAME, pop_growth_rate), y = pop_growth_rate)) +
   geom_col(aes(fill = NAME == "Sheridan, WY")) +
-  scale_fill_manual(values = c("TRUE" = "#e31a1c", "FALSE" = "#2c7fb8"), guide = "none") +
+  scale_fill_manual(values = c("TRUE" = "#33a02c", "FALSE" = "#2c7fb8"), guide = "none") +
   geom_text(aes(label = paste0(round(pop_growth_rate, 1), "%")), hjust = -0.1, size = 3) +
   coord_flip() +
   labs(
@@ -263,16 +263,6 @@ sheridan_row <- final_table %>%
   filter(Name == "Sheridan, WY") %>%
   select(Name, PERINCREASE)
 
-# If Sheridan, WY already in top10, give it a second label
-sheridan_label <- if ("Sheridan, WY" %in% top10$Name) {
-  "Sheridan, WY (duplicate)"
-} else {
-  "Sheridan, WY"
-}
-
-# Rename Sheridan row
-sheridan_row$Name <- sheridan_label
-
 # Combine top10, median row, and Sheridan row (no deduping)
 combined_data <- top10 %>%
   bind_rows(tibble(Name = "Median", PERINCREASE = median_value)) %>%
@@ -289,9 +279,10 @@ ggplot(combined_data, aes(x = reorder(Name, PERINCREASE), y = PERINCREASE)) +
   geom_text(aes(label = paste0(round(PERINCREASE, 1), "%")), 
             hjust = -0.1, size = 3) +
   labs(
-    title = "Top 10 Regions by Percent Increase + Median + Sheridan, WY",
+    title = "Top 10 Regions by Building Permit Percent Increase (2020 - 2022)", 
+    subtitle = "Sheridan, WY and the median are included for comparison. Sheridan is much higher than the median, but not in the top 10",
     x = NULL,
-    y = "Percent Increase",
+    y = "Building Permit Increase (%)",
     fill = NULL
   ) +
   scale_fill_identity() +
