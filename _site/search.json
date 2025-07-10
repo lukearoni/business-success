@@ -33,5 +33,12 @@
     "title": "Sources",
     "section": "",
     "text": "US Census Bureau 2022 Business Dynamics Statistics Dataset (MSA) US Census Bureau Metropolitan Area Code and Area Name (Mar. 2020)\nWe obtained the data by using the US Census Bureau Datasets. From those datasets, we converted them to csv files and added them to the project. We did not have to wrangle the data much, only changing column names for ease of use as well as eliminating duplicate data. We also dropped data that had any not available information."
+  },
+  {
+    "objectID": "index.html#explaining-sheridan-wy",
+    "href": "index.html#explaining-sheridan-wy",
+    "title": "New Businesses in Different Areas",
+    "section": "Explaining Sheridan, WY",
+    "text": "Explaining Sheridan, WY"
   }
 ]

@@ -63,14 +63,6 @@ ggplot(aes(x = estabs_entry_rate, y = estabs_exit_rate, label = msa_name)) +
   theme_minimal()
 ```
 
-```{r}
-bds_rates <- bds2022 %>%
-  mutate(
-    startup_rate_raw = estabs_entry_rate,
-    exit_rate_raw = estabs_exit_rate
-  )
-```
-
 ```{r, fig.width=16, fig.height=8}
 # Home page plot
 bds2022 |>
@@ -80,7 +72,7 @@ bds2022 |>
   ggplot(aes(x = factor(rank, levels = rev(1:20)), y = estabs_entry_rate)) +
   coord_flip() + 
   geom_col(fill = "#1f78b4") +
-  geom_text(aes(label = paste0(msa_name, ": ", round(estabs_entry_rate, 1))), # Labeling area names after the bars
+  geom_text(aes(label = paste0(msa_name, ": ", round(estabs_entry_rate, 1))), # Labeling area names after the bars as a way to work around the bug
           vjust = 0.5, hjust = -0.1, size = 4) +
 scale_y_continuous(limits = c(0, 28)) +
 labs(
@@ -100,3 +92,116 @@ labs(
 ```
 
 Establishment entry rates vary amongst different metropolitan areas. We obtained a dataset containing business dynamics data from the US Census Bureau, including the 2022 establishment entry and exit rates for each metropolitan area. This records the number of new shops, startups, or franchise buildings divided by the total number of establishments in that area during 2022. We seek to use this data to find the metropolitan areas with the highest rate. Sheridan, Wyoming is a high outlier for establishment entry rates, with an over 6% increase from the second highest, while the rest of the top 20 metropolitan area entry rates don't differ by more than 2.2%.
+
+## Explaining Sheridan, WY
+
+```{r}
+# Load total population data (B01003)
+pop_raw <- read_csv("cbsa-est2024-alldata-char.csv")
+
+# Clean and select relevant columns
+library(readr)
+library(dplyr)
+
+# Define the mapping of AGEGRP codes to age ranges
+age_group_map <- c(
+  "1" = "0-4",
+  "2" = "5-9",
+  "3" = "10-14",
+  "4" = "15-19",
+  "5" = "20-24",
+  "6" = "25-29",
+  "7" = "30-34",
+  "8" = "35-39",
+  "9" = "40-44",
+  "10" = "45-49",
+  "11" = "50-54",
+  "12" = "55-59",
+  "13" = "60-64",
+  "14" = "65-69",
+  "15" = "70-74",
+  "16" = "75-79",
+  "17" = "80-84",
+  "18" = "85+"
+)
+
+# Clean and transform the dataset
+pop_clean <- pop_raw %>%
+  # Keep only the relevant columns
+  select(CBSA, NAME, YEAR, AGEGRP, TOT_POP) %>%
+  
+  # Filter to YEAR codes 1–3 only (corresponding to 2020–2022)
+  filter(YEAR %in% 1:3) %>%
+  
+  # Convert YEAR codes to actual years
+  mutate(YEAR = case_when(
+    YEAR == 1 ~ 2020,
+    YEAR == 2 ~ 2021,
+    YEAR == 3 ~ 2022
+  )) %>%
+  
+  # Remove AGEGRP == 0 (total population, not an age group)
+  filter(AGEGRP != 0) %>%
+  
+  # Replace AGEGRP codes with human-readable labels
+  mutate(AGE_RANGE = recode(as.character(AGEGRP), !!!age_group_map)) %>%
+  
+  # Reorder columns for clarity
+  select(CBSA, NAME, YEAR, AGE_RANGE, TOT_POP)
+```
+
+```{r, fig.width=14, fig.height=8}
+library(dplyr)
+library(ggplot2)
+library(tidyr)
+library(scales)
+
+# Step 1: Total population per CBSA, NAME, YEAR (sum across age groups)
+pop_summary <- pop_clean %>%
+  group_by(CBSA, NAME, YEAR) %>%
+  summarise(total_pop = sum(TOT_POP, na.rm = TRUE), .groups = "drop")
+
+# Step 2: Pivot to wide format for 2020 and 2022
+pop_wide <- pop_summary %>%
+  pivot_wider(names_from = YEAR, values_from = total_pop, names_prefix = "year_")
+
+# Step 3: Calculate percent population growth
+growth_rates <- pop_wide %>%
+  mutate(
+    pop_growth_rate = 100 * (year_2022 - year_2020) / year_2020
+  ) %>%
+  filter(!is.na(pop_growth_rate))
+
+# Step 4: Get top 10 metros by growth rate
+top10 <- growth_rates %>%
+  slice_max(order_by = pop_growth_rate, n = 10)
+
+# Step 5: Find Sheridan, WY by exact match
+sheridan <- growth_rates %>%
+  filter(NAME == "Sheridan, WY")
+
+# Step 6: Combine top 10 and Sheridan, remove duplicates
+plot_data <- bind_rows(top10, sheridan) %>%
+  distinct(CBSA, .keep_all = TRUE)
+
+# Step 7: Plot
+ggplot(plot_data, aes(x = reorder(NAME, pop_growth_rate), y = pop_growth_rate)) +
+  geom_col(aes(fill = NAME == "Sheridan, WY")) +
+  scale_fill_manual(values = c("TRUE" = "#e31a1c", "FALSE" = "#2c7fb8"), guide = "none") +
+  geom_text(aes(label = paste0(round(pop_growth_rate, 1), "%")), hjust = -0.1, size = 3) +
+  coord_flip() +
+  labs(
+    title = "Top 10 Metro Areas by Population Growth Rate (2020–2022)",
+    subtitle = "Sheridan, WY included for comparison",
+    x = NULL,
+    y = "Population Growth Rate (%)"
+  ) +
+  scale_y_continuous(labels = percent_format(scale = 1), expand = expansion(mult = c(0, 0.1))) +
+  theme_minimal() + 
+  theme(
+    plot.title = element_text(size = 24, face = "bold"),
+    plot.subtitle = element_text(size = 20),
+    axis.title = element_text(size = 20),
+    plot.caption = element_text(size = 20)
+  )
+```

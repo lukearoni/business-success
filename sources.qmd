@@ -9,5 +9,8 @@ execute:
 
 [US Census Bureau 2022 Business Dynamics Statistics Dataset (MSA)](https://www.census.gov/data/datasets/time-series/econ/bds/bds-datasets.html)
 [US Census Bureau Metropolitan Area Code and Area Name (Mar. 2020)](https://www.census.gov/geographies/reference-files/time-series/demo/metro-micro/historical-delineation-files.html)
+[US Census Bureau Annual Metropolitan and Micropolitan Statistical Area Resident Population Estimates by Age, Sex, Race, and Hispanic Origin for the United States: April 1, 2020 to July 1, 2024 (CBSA-EST2024-ALLDATA-CHAR)](https://www.census.gov/data/tables/time-series/demo/popest/2020s-metro-and-micro-statistical-areas-detail.html)
+[US Census Bureau Building Permits by CBSA 2019 - Present](https://www.census.gov/construction/bps/msamonthly.html)
+[Annual Residential Housing Units Authorized by Building Permits For Wyoming and Counties: 1987 to 2024](http://eadiv.state.wy.us/housing/annlbldg.htm)
 
 We obtained the data by using the US Census Bureau Datasets. From those datasets, we converted them to csv files and added them to the project. We did not have to wrangle the data much, only changing column names for ease of use as well as eliminating duplicate data. We also dropped data that had any not available information.
