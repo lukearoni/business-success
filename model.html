@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.7.31">
+<meta name="generator" content="quarto-1.7.32">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -36,7 +36,7 @@ ul.task-list li input[type="checkbox"] {
 <script src="site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="site_libs/quarto-html/anchor.min.js"></script>
 <link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting-e1a5c8363afafaef2c763b6775fbf3ca.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-37eea08aefeeee20ff55810ff984fec1.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
 <link href="site_libs/bootstrap/bootstrap-c1fac2584b48ed01fb6e278e36375074.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
@@ -120,7 +120,7 @@ window.Quarto = {
             <ul class="navbar-nav navbar-nav-scroll me-auto">
   <li class="nav-item">
     <a class="nav-link" href="./index.html"> 
-<span class="menu-text">New Businesses in Different Areas</span></a>
+<span class="menu-text">Introduction</span></a>
   </li>  
   <li class="nav-item">
     <a class="nav-link" href="./index2.html"> 
@@ -149,8 +149,15 @@ window.Quarto = {
 <div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
 <!-- sidebar -->
 <!-- margin-sidebar -->
-    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar zindex-bottom">
-        
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#table" id="toc-table" class="nav-link active" data-scroll-target="#table">Table</a></li>
+  <li><a href="#models" id="toc-models" class="nav-link" data-scroll-target="#models">Models</a></li>
+  </ul>
+</nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
@@ -174,10 +181,12 @@ window.Quarto = {
 </header>
 
 
+<section id="table" class="level2">
+<h2 class="anchored" data-anchor-id="table">Table</h2>
 <div class="cell">
 <div class="cell-output-display">
 <table class="caption-top table table-sm table-striped small">
-<caption>Regression Model Coefficients with Prettified Terms</caption>
+<caption>Regression Model Coefficients</caption>
 <colgroup>
 <col style="width: 50%">
 <col style="width: 20%">
@@ -198,7 +207,23 @@ window.Quarto = {
 </thead>
 <tbody>
 <tr class="odd">
-<td style="text-align: left;">Plot 1: Net Job Creation Rate ~ Establishment Entry Rate</td>
+<td style="text-align: left;">Plot 1: Establishment Exit Rate ~ Establishment Entry Rate</td>
+<td style="text-align: left;">Intercept</td>
+<td style="text-align: right;">5.4014</td>
+<td style="text-align: right;">0.1707</td>
+<td style="text-align: right;">31.6385</td>
+<td style="text-align: right;">0.000</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Plot 1: Establishment Exit Rate ~ Establishment Entry Rate</td>
+<td style="text-align: left;">Establishment Entry Rate</td>
+<td style="text-align: right;">0.3358</td>
+<td style="text-align: right;">0.0172</td>
+<td style="text-align: right;">19.5614</td>
+<td style="text-align: right;">0.000</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Plot 2: Net Job Creation Rate ~ Establishment Entry Rate</td>
 <td style="text-align: left;">Intercept</td>
 <td style="text-align: right;">-3.5160</td>
 <td style="text-align: right;">0.5545</td>
@@ -206,7 +231,7 @@ window.Quarto = {
 <td style="text-align: right;">0.000</td>
 </tr>
 <tr class="even">
-<td style="text-align: left;">Plot 1: Net Job Creation Rate ~ Establishment Entry Rate</td>
+<td style="text-align: left;">Plot 2: Net Job Creation Rate ~ Establishment Entry Rate</td>
 <td style="text-align: left;">Establishment Entry Rate</td>
 <td style="text-align: right;">0.7019</td>
 <td style="text-align: right;">0.0558</td>
@@ -214,7 +239,7 @@ window.Quarto = {
 <td style="text-align: right;">0.000</td>
 </tr>
 <tr class="odd">
-<td style="text-align: left;">Plot 2: Job Creation Rate (Births) ~ Establishment Entry Rate</td>
+<td style="text-align: left;">Plot 3: Job Creation Rate (Births) ~ Establishment Entry Rate</td>
 <td style="text-align: left;">Intercept</td>
 <td style="text-align: right;">-0.3006</td>
 <td style="text-align: right;">0.2323</td>
@@ -222,7 +247,7 @@ window.Quarto = {
 <td style="text-align: right;">0.196</td>
 </tr>
 <tr class="even">
-<td style="text-align: left;">Plot 2: Job Creation Rate (Births) ~ Establishment Entry Rate</td>
+<td style="text-align: left;">Plot 3: Job Creation Rate (Births) ~ Establishment Entry Rate</td>
 <td style="text-align: left;">Establishment Entry Rate</td>
 <td style="text-align: right;">0.4431</td>
 <td style="text-align: right;">0.0234</td>
@@ -233,16 +258,23 @@ window.Quarto = {
 </table>
 </div>
 </div>
+</section>
+<section id="models" class="level2">
+<h2 class="anchored" data-anchor-id="models">Models</h2>
 <p><strong>Model 1</strong> (for plot 1) <span class="math display">\[
-\text{net\_job\_creation\_rate}_i = \beta_0 + \beta_1 \cdot \text{estabs\_entry\_rate}_i + \epsilon_i
+\text{estabs\_exit\_rate}_i = \beta_0 + \beta_1 \cdot \text{estabs\_entry\_rate}_i + \epsilon_i
 \]</span></p>
 <p><strong>Model 2</strong> (for plot 2) <span class="math display">\[
+\text{net\_job\_creation\_rate}_i = \beta_0 + \beta_1 \cdot \text{estabs\_entry\_rate}_i + \epsilon_i
+\]</span></p>
+<p><strong>Model 3</strong> (for plot 3) <span class="math display">\[
 \text{job\_creation\_rate\_births}_i = \beta_0 + \beta_1 \cdot \text{estabs\_entry\_rate}_i + \epsilon_i
 \]</span></p>
-<p>The first model examines the relationship between the net job creation rate and the establishment entry rate. It is specified as a simple linear regression where the net job creation rate for observation 𝑖 is modeled as a function of a constant intercept term <span class="math inline">\(\beta_0\)</span>, the establishment entry rate multiplied by its slope coefficient <span class="math inline">\(\beta_1\)</span>, and a random error term <span class="math inline">\(\epsilon_i\)</span>, capturing unexplained variation. This model quantifies how changes in the rate at which new establishments enter the market are associated with overall net changes in employment within a state or region.</p>
-<p>The second model similarly uses a linear regression framework to relate the job creation rate from births to the establishment entry rate. Here, the dependent variable is the job creation rate attributed specifically to new business births, modeled as a linear function of the establishment entry rate, an intercept, and a random error term. Both models assume linearity and normally distributed residuals, providing a basis to estimate and test the statistical significance of the association between business entry dynamics and employment growth.</p>
+<p>The first model examines the relationship between the establishment entry rate and the establishment entry rate. It is specified as a simple linear regression where the exit rate for observation 𝑖 is modeled as a function of a constant intercept term <span class="math inline">\(\beta_0\)</span>, the establishment entry rate multiplied by its slope coefficient <span class="math inline">\(\beta_1\)</span>, and a random error term <span class="math inline">\(\epsilon_i\)</span>, capturing unexplained variation. This model quantifies how changes in the rate at which new establishments enter the market are associated with changes in the rate at which existing establishment leave the market.</p>
+<p>The second and third models similarly use a linear regression framework to relate the net job creation rate and job creation rate from births to the establishment entry rate. Here, for both, the dependent variable is the job creation rate attributed specifically to new business births, modeled as a linear function of the establishment entry rate, an intercept, and a random error term. All models assume linearity and normally distributed residuals, providing a basis to estimate and test the statistical significance of the association between business entry dynamics and employment growth.</p>
 
 
+</section>
 
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
