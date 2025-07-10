@@ -66,5 +66,10 @@ p2 <- ggplot(plot_data, aes(x = estabs_entry_rate, y = job_creation_rate_births)
 
 ```{r}
 # Display plots
-p1 + p2
+p1
+```
+
+```{r}
+# Display plots
+p2
 ```
