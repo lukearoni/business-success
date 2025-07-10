@@ -50,6 +50,10 @@ bds2022 <- bds2022 %>%
   select(msa_name, everything())
 ```
 
+# Exit Rate
+
+## Plot 1
+
 ```{r}
 bds2022 |>
   distinct() |> 
@@ -99,9 +103,9 @@ p2 <- ggplot(plot_data, aes(x = estabs_entry_rate, y = job_creation_rate_births)
   )
 ```
 
-## Job Impacts
+# Job Impacts
 
-# Plot 1
+## Plot 2
 ```{r}
 # Display plots
 p1
@@ -109,7 +113,7 @@ p1
 
 A linear trend
 
-# Plot 2
+## Plot 3
 ```{r}
 # Display plots
 p2

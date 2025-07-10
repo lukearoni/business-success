@@ -32,14 +32,17 @@ bds2022 <- read_csv("bds2022_msa.csv") %>%
   drop_na()
 ```
 
+## Table
+
 ```{r}
 library(broom)
 library(dplyr)
 library(knitr)
 
 # Fit models
-model1 <- lm(net_job_creation_rate ~ estabs_entry_rate, data = bds2022)
-model2 <- lm(job_creation_rate_births ~ estabs_entry_rate, data = bds2022)
+model1 <- lm(estabs_exit_rate ~ estabs_entry_rate, data = bds2022)
+model2 <- lm(net_job_creation_rate ~ estabs_entry_rate, data = bds2022)
+model3 <- lm(job_creation_rate_births ~ estabs_entry_rate, data = bds2022)
 
 # Function to prettify term names
 pretty_terms <- function(term) {
@@ -53,39 +56,54 @@ pretty_terms <- function(term) {
 # Extract tidy summaries with nicer model titles
 tidy_m1 <- broom::tidy(model1) %>%
   mutate(
-    Model = "Plot 1: Net Job Creation Rate ~ Establishment Entry Rate",
+    Model = "Plot 1: Establishment Exit Rate ~ Establishment Entry Rate",
     Term = pretty_terms(term)
   ) %>%
   select(Model, Term, estimate, std.error, statistic, p.value)
 
 tidy_m2 <- broom::tidy(model2) %>%
   mutate(
-    Model = "Plot 2: Job Creation Rate (Births) ~ Establishment Entry Rate",
+    Model = "Plot 2: Net Job Creation Rate ~ Establishment Entry Rate",
+    Term = pretty_terms(term)
+  ) %>%
+  select(Model, Term, estimate, std.error, statistic, p.value)
+
+tidy_m3 <- broom::tidy(model3) %>%
+  mutate(
+    Model = "Plot 3: Job Creation Rate (Births) ~ Establishment Entry Rate",
     Term = pretty_terms(term)
   ) %>%
   select(Model, Term, estimate, std.error, statistic, p.value)
 
 # Combine results
-all_models <- bind_rows(tidy_m1, tidy_m2)
+all_models <- bind_rows(tidy_m1, tidy_m2, tidy_m3)
 
 # Rename columns for display
 colnames(all_models) <- c("Model", "Term", "Estimate", "Std. Error", "t value", "p value")
 
 # Display table
-kable(all_models, digits = 4, caption = "Regression Model Coefficients with Prettified Terms")
+kable(all_models, digits = 4, caption = "Regression Model Coefficients")
 ```
+
+## Models
 
 **Model 1** (for plot 1)
 $$
-\text{net\_job\_creation\_rate}_i = \beta_0 + \beta_1 \cdot \text{estabs\_entry\_rate}_i + \epsilon_i
+\text{estabs\_exit\_rate}_i = \beta_0 + \beta_1 \cdot \text{estabs\_entry\_rate}_i + \epsilon_i
 $$
 
 **Model 2** (for plot 2)
 $$
+\text{net\_job\_creation\_rate}_i = \beta_0 + \beta_1 \cdot \text{estabs\_entry\_rate}_i + \epsilon_i
+$$
+
+**Model 3** (for plot 3)
+$$
 \text{job\_creation\_rate\_births}_i = \beta_0 + \beta_1 \cdot \text{estabs\_entry\_rate}_i + \epsilon_i
 $$
 
-The first model examines the relationship between the net job creation rate and the establishment entry rate. It is specified as a simple linear regression where the net job creation rate for observation 𝑖 is modeled as a function of a constant intercept term  $\beta_0$, the establishment entry rate multiplied by its slope coefficient $\beta_1$, and a random error term $\epsilon_i$, capturing unexplained variation. This model quantifies how changes in the rate at which new establishments enter the market are associated with overall net changes in employment within a state or region.
 
-The second model similarly uses a linear regression framework to relate the job creation rate from births to the establishment entry rate. Here, the dependent variable is the job creation rate attributed specifically to new business births, modeled as a linear function of the establishment entry rate, an intercept, and a random error term. Both models assume linearity and normally distributed residuals, providing a basis to estimate and test the statistical significance of the association between business entry dynamics and employment growth.
+The first model examines the relationship between the establishment entry rate and the establishment entry rate. It is specified as a simple linear regression where the exit rate for observation 𝑖 is modeled as a function of a constant intercept term  $\beta_0$, the establishment entry rate multiplied by its slope coefficient $\beta_1$, and a random error term $\epsilon_i$, capturing unexplained variation. This model quantifies how changes in the rate at which new establishments enter the market are associated with changes in the rate at which existing establishment leave the market.
+
+The second and third models similarly use a linear regression framework to relate the net job creation rate and job creation rate from births to the establishment entry rate. Here, for both, the dependent variable is the job creation rate attributed specifically to new business births, modeled as a linear function of the establishment entry rate, an intercept, and a random error term. All models assume linearity and normally distributed residuals, providing a basis to estimate and test the statistical significance of the association between business entry dynamics and employment growth.
  

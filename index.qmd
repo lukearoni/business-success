@@ -58,10 +58,10 @@ bds2022 |>
           vjust = 0.5, hjust = -0.1, size = 4) +
 scale_y_continuous(limits = c(0, 28)) +
 labs(
-    title = "Top 20 Metro Areas by Establishment Entry Rate (2022)",
-    subtitle = "Share of new establishments out of total existing establishments",
+    title = "Top 20 Metro and Micropolitan Areas by Establishment Entry Rate (2022)",
+    subtitle = "Sheridan, WY is an outlier with the highest entry rate of 23.4%",
     x = "Rank",
-    y = "Entry Rate (%)",
+    y = "Entry Rate (%) (new establishments / total existing establishments)",
     caption = "Source: U.S. Census Bureau BDS 2022"
   ) +
   theme_minimal() + 
