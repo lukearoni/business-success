@@ -9,9 +9,9 @@
   {
     "objectID": "index.html",
     "href": "index.html",
-    "title": "New Businesses in Different Areas",
+    "title": "Introduction",
     "section": "",
-    "text": "Establishment entry rates vary amongst different metropolitan areas. We obtained a dataset containing business dynamics data from the US Census Bureau, including the 2022 establishment entry and exit rates for each metropolitan area. This records the number of new shops, startups, or franchise buildings divided by the total number of establishments in that area during 2022. We seek to use this data to find the metropolitan areas with the highest rate. Sheridan, Wyoming is a high outlier for establishment entry rates, with an over 6% increase from the second highest, while the rest of the top 20 metropolitan area entry rates don’t differ by more than 2.2%."
+    "text": "Establishment entry rates vary amongst different metropolitan areas within the United States. I obtained a dataset containing business dynamics data from the US Census Bureau, including the 2022 establishment entry and exit rates for each metropolitan area. This records the number of new shops, startups, or franchise buildings divided by the total number of establishments in that area during 2022. I sought to use this data to find the metropolitan areas with the highest rate. Sheridan, Wyoming is a high outlier for establishment entry rates, with an over 6% increase from the second highest, while the rest of the top 20 metropolitan area entry rates don’t differ by more than 2.2%."
   },
   {
     "objectID": "index.html#plot",
@@ -37,9 +37,9 @@
   {
     "objectID": "index.html#explaining-sheridan-wy",
     "href": "index.html#explaining-sheridan-wy",
-    "title": "New Businesses in Different Areas",
+    "title": "Introduction",
     "section": "Explaining Sheridan, WY",
-    "text": "Explaining Sheridan, WY"
+    "text": "Explaining Sheridan, WY\n\n\n\n\n\n\n\n\n\nPlotting 2 more graphs, I aim to explain the intriguing outlier of Sheridan, Wyoming. Some common factors that influence establishment entry rates in an area are their population growth and rate of increased building permits in recent years. The plots show that Sheridan was not within the top 10 for either metric. However, Sheridan was well above the median rate for both population growth and building permit rate of increase. This indicates that Sheridan’s high establishment entry rate was likely due to a multitude of factors, which can be further explored."
   },
   {
     "objectID": "index2.html",

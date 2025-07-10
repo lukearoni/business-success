@@ -62,16 +62,18 @@ ggplot(aes(x = estabs_entry_rate, y = estabs_exit_rate, label = msa_name)) +
   ggrepel::geom_text_repel(data = subset(bds2022, estabs_entry_rate > 20)) +
   geom_smooth(method = "lm", color = "skyblue", se = FALSE) + 
   scale_x_continuous(limits = c(5, 25)) + 
-  scale_y_continuous(limits = c(5, 25)) + 
+  scale_y_continuous(limits = c(5, 20)) + 
   labs(
     title = "2022 Metropolitan Area Establishment Entry Rates vs Exit Rates",
     subtitle = "As entry rate increases, exit rate also increases",
-    x = "Entry Rate (Establishment Entries per 100 Existing)",
-    y = "Exit Rate (Establishment Exits per 100 Existing)",
+    x = "Entry Rate (%) (Establishment Entries per 100 Existing)",
+    y = "Exit Rate (%) (Establishment Exits per 100 Existing)",
     caption = "Source: U.S. Census Bureau BDS 2022"
   ) +
   theme_minimal()
 ```
+
+
 
 ```{r}
 library(tidyverse)
@@ -84,7 +86,7 @@ p1 <- ggplot(plot_data_1, aes(x = estabs_entry_rate, y = job_creation_rate)) +
   geom_smooth(method = "lm", color = "skyblue", se = FALSE) +
   theme_minimal() +
   labs(title = "Job Creation Rate vs Establishment Entry Rate",
-       x = "Establishment Entry Rate",
+       x = "Entry Rate (%) (Establishment Entries per 100 Existing)",
        y = "Job Creation Rate (%)")
 
 # Remove duplicate points for job_creation_rate_births vs net_job_creation_rate
@@ -98,7 +100,7 @@ p2 <- ggplot(plot_data, aes(x = estabs_entry_rate, y = job_creation_rate_births)
   theme_minimal() +
   labs(
     title = "Establishment Entry Rate vs Job Creation Rate (Births)",
-    x = "Establishment Entry Rate",
+    x = "Entry Rate (%) (Establishment Entries per 100 Existing)",
     y = "Job Creation Rate From New Establishments (%)"
   )
 ```

@@ -1,5 +1,5 @@
 ---
-title: "New Businesses in Different Areas"
+title: "Introduction"
 subtitle: "Comparing Establishment Entry Rates in Different Metropolitan Areas"
 execute:
     echo: false
@@ -73,7 +73,7 @@ labs(
   )
 ```
 
-Establishment entry rates vary amongst different metropolitan areas. We obtained a dataset containing business dynamics data from the US Census Bureau, including the 2022 establishment entry and exit rates for each metropolitan area. This records the number of new shops, startups, or franchise buildings divided by the total number of establishments in that area during 2022. We seek to use this data to find the metropolitan areas with the highest rate. Sheridan, Wyoming is a high outlier for establishment entry rates, with an over 6% increase from the second highest, while the rest of the top 20 metropolitan area entry rates don't differ by more than 2.2%.
+Establishment entry rates vary amongst different metropolitan areas within the United States. I obtained a dataset containing business dynamics data from the US Census Bureau, including the 2022 establishment entry and exit rates for each metropolitan area. This records the number of new shops, startups, or franchise buildings divided by the total number of establishments in that area during 2022. I sought to use this data to find the metropolitan areas with the highest rate. Sheridan, Wyoming is a high outlier for establishment entry rates, with an over 6% increase from the second highest, while the rest of the top 20 metropolitan area entry rates don't differ by more than 2.2%.
 
 ## Explaining Sheridan, WY
 
@@ -290,3 +290,5 @@ p2 <- ggplot(combined_data, aes(x = reorder(Name, PERINCREASE), y = PERINCREASE)
 library(patchwork)
 p1 + p2
 ```
+
+Plotting 2 more graphs, I aim to explain the intriguing outlier of Sheridan, Wyoming. Some common factors that influence establishment entry rates in an area are their population growth and rate of increased building permits in recent years. The plots show that Sheridan was not within the top 10 for either metric. However, Sheridan was well above the median rate for both population growth and building permit rate of increase. This indicates that Sheridan's high establishment entry rate was likely due to a multitude of factors, which can be further explored.
