@@ -205,3 +205,109 @@ ggplot(plot_data, aes(x = reorder(NAME, pop_growth_rate), y = pop_growth_rate)) 
     plot.caption = element_text(size = 20)
   )
 ```
+
+```{r}
+# Step 1: Read in both CSVs and keep only relevant columns
+data_2020 <- read_csv("permit-data-2020.csv") %>%
+  select(Name, Total) %>%
+  rename(TOTAL_2020 = Total)
+
+data_2022 <- read_csv("permit-data-2022.csv") %>%
+  select(Name, Total) %>%
+  rename(TOTAL_2022 = Total)
+
+# Step 2: Join by NAME
+combined <- full_join(data_2020, data_2022, by = "Name")
+
+# Step 3: Calculate percent increase
+combined <- combined %>%
+  mutate(
+    PERINCREASE = round(100 * (TOTAL_2022 - TOTAL_2020) / TOTAL_2020, 1)
+  )
+
+# Step 4: Add Sheridan, WY manually
+sheridan <- tibble(
+  Name = "Sheridan, WY",
+  TOTAL_2020 = NA,
+  TOTAL_2022 = NA,
+  PERINCREASE = 69.6
+)
+
+# Step 5: Add to combined table
+final_table <- bind_rows(combined, sheridan) %>%
+  filter(!is.na(Name))
+```
+
+```{r}
+# Step 1: Select top 10 by PERINCREASE
+top10 <- final_table %>%
+  filter(!is.na(PERINCREASE)) %>%
+  slice_max(order_by = PERINCREASE, n = 10)
+
+# Step 2: Plot bar graph
+ggplot(top10, aes(x = reorder(Name, PERINCREASE), y = PERINCREASE)) +
+  geom_col(fill = "#1f78b4") +
+  coord_flip() +
+  geom_text(aes(label = paste0(PERINCREASE, "%")), hjust = -0.1, size = 3) +
+  labs(
+    title = "Top 10 Regions by Percent Increase",
+    x = NULL,
+    y = "Percent Increase"
+  ) +
+  scale_y_continuous(expand = expansion(mult = c(0, 0.15))) +
+  theme_minimal()
+```
+
+```{r}
+final_table <- final_table %>%
+  group_by(Name) %>%
+  mutate(MEDIAN_PERINCREASE = median(PERINCREASE, na.rm = TRUE)) %>%
+  ungroup()
+```
+
+```{r}
+library(dplyr)
+library(ggplot2)
+
+median_value <- median(final_table$PERINCREASE, na.rm = TRUE)
+
+# Get Sheridan WY row exactly
+sheridan_row <- final_table %>%
+  filter(tolower(Name) == "Sheridan, WY") %>%
+  select(Name, PERINCREASE)
+
+top10 <- final_table %>%
+  filter(!is.na(PERINCREASE)) %>%
+  slice_max(order_by = PERINCREASE, n = 10) %>%
+  select(Name, PERINCREASE)
+
+# Combine rows WITHOUT removing duplicates
+combined_data <- bind_rows(
+  top10,
+  tibble(Name = "Median", PERINCREASE = median_value),
+  sheridan_row
+)
+
+# To ensure Sheridan shows, give Sheridan a unique label if it’s duplicated in top10
+combined_data <- combined_data %>%
+  mutate(Name = ifelse(duplicated(Name) & Name == "Sheridan, WY", "Sheridan, WY (extra)", Name))
+
+# Plot
+ggplot(combined_data, aes(x = reorder(Name, PERINCREASE), y = PERINCREASE)) +
+  geom_col(aes(fill = case_when(
+    Name == "Median" ~ "#e31a1c",
+    grepl("Sheridan, WY", Name) ~ "#33a02c",
+    TRUE ~ "#1f78b4"
+  ))) +
+  coord_flip() +
+  geom_text(aes(label = paste0(round(PERINCREASE, 1), "%")), hjust = -0.1, size = 3) +
+  labs(
+    title = "Top 10 Regions by Percent Increase + Median + Sheridan, WY",
+    x = NULL,
+    y = "Percent Increase",
+    fill = NULL
+  ) +
+  scale_fill_identity() +
+  scale_y_continuous(expand = expansion(mult = c(0, 0.15))) +
+  theme_minimal()
+```
