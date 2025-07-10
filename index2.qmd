@@ -96,6 +96,8 @@ p2 <- ggplot(plot_data, aes(x = estabs_entry_rate, y = job_creation_rate_births)
   )
 ```
 
+## Job Impacts
+
 # Plot 1
 ```{r}
 # Display plots

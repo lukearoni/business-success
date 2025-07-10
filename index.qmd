@@ -159,20 +159,37 @@ sheridan <- growth_rates %>%
 plot_data <- bind_rows(top10, sheridan) %>%
   distinct(CBSA, .keep_all = TRUE)
 
-# Step 7: Plot
-ggplot(plot_data, aes(x = reorder(NAME, pop_growth_rate), y = pop_growth_rate)) +
-  geom_col(aes(fill = NAME == "Sheridan, WY")) +
-  scale_fill_manual(values = c("TRUE" = "#33a02c", "FALSE" = "#2c7fb8"), guide = "none") +
+# Step 7: Calculate median (from all CBSA-level data)
+median_growth <- median(growth_rates$pop_growth_rate, na.rm = TRUE)
+median_row <- data.frame(
+  CBSA = NA, NAME = "Median", year_2020 = NA, year_2022 = NA,
+  pop_growth_rate = median_growth
+)
+plot_data_with_median <- bind_rows(plot_data, median_row)
+
+# Step 8: Plot
+p1 <- ggplot(plot_data_with_median, aes(x = reorder(NAME, pop_growth_rate), y = pop_growth_rate)) +
+  geom_col(aes(
+    fill = case_when(
+      NAME == "Sheridan, WY" ~ "Sheridan",
+      NAME == "Median" ~ "Median",
+      TRUE ~ "Other"
+    )
+  )) +
+  scale_fill_manual(
+    values = c("Sheridan" = "#33a02c", "Other" = "#2c7fb8", "Median" = "#e31a1c"),
+    guide = "none"
+  ) +
   geom_text(aes(label = paste0(round(pop_growth_rate, 1), "%")), hjust = -0.1, size = 3) +
   coord_flip() +
   labs(
-    title = "Top 10 Metro Areas by Population Growth Rate (2020–2022)",
-    subtitle = "Sheridan, WY included for comparison",
+    title = "Top 10 Metro and Micropolitan Areas by Population Growth Rate (2020–2022)",
+    subtitle = str_wrap("Sheridan, WY and the median are included for comparison. Sheridan is much higher than the median, but not in the top 10", width = 80), 
     x = NULL,
     y = "Population Growth Rate (%)"
   ) +
   scale_y_continuous(labels = percent_format(scale = 1), expand = expansion(mult = c(0, 0.1))) +
-  theme_minimal() + 
+  theme_minimal() +
   theme(
     plot.title = element_text(size = 24, face = "bold"),
     plot.subtitle = element_text(size = 20),
@@ -242,7 +259,7 @@ combined_data <- top10 %>%
   bind_rows(sheridan_row)
 
 # Plot with custom colors
-ggplot(combined_data, aes(x = reorder(Name, PERINCREASE), y = PERINCREASE)) +
+p2 <- ggplot(combined_data, aes(x = reorder(Name, PERINCREASE), y = PERINCREASE)) +
   geom_col(aes(fill = case_when(
     Name == "Median" ~ "#e31a1c",                   # red for median
     grepl("Sheridan", Name) ~ "#33a02c",            # green for Sheridan
@@ -252,8 +269,8 @@ ggplot(combined_data, aes(x = reorder(Name, PERINCREASE), y = PERINCREASE)) +
   geom_text(aes(label = paste0(round(PERINCREASE, 1), "%")), 
             hjust = -0.1, size = 3) +
   labs(
-    title = "Top 10 Regions by Building Permit Percent Increase (2020 - 2022)", 
-    subtitle = "Sheridan, WY and the median are included for comparison. Sheridan is much higher than the median, but not in the top 10",
+    title = "Top 10 Metropolitan Areas by Building Permit Percent Increase (2020 - 2022)", 
+    subtitle = str_wrap("Sheridan, WY and the median are included for comparison. Sheridan is much higher than the median, but not in the top 10", width = 80), 
     x = NULL,
     y = "Building Permit Increase (%)",
     fill = NULL
@@ -267,4 +284,9 @@ ggplot(combined_data, aes(x = reorder(Name, PERINCREASE), y = PERINCREASE)) +
     axis.title = element_text(size = 20),
     plot.caption = element_text(size = 20)
   )
+```
+
+```{r, fig.width=30, fig.height=8}
+library(patchwork)
+p1 + p2
 ```
