@@ -38,29 +38,11 @@ msa_names <- read_csv("list1_2020.csv") %>%
     msa_name = cbsa_title
   )
 
-# Clean your BDS data and convert code to character
+# Clean BDS data and convert code to character
 bds2022 <- bds2022 %>%
   mutate(msa = as.character(msa)) %>%
   left_join(msa_names, by = c("msa" = "cbsa_code")) %>%
   select(msa_name, everything())
-```
-
-```{r}
-#| eval: false
-#| echo: false
-bds2022 |>
-  distinct() |> 
-ggplot(aes(x = estabs_entry_rate, y = estabs_exit_rate, label = msa_name)) +
-  geom_point(color = "#1f78b4", alpha = 0.7, size = 3) +
-  ggrepel::geom_text_repel(data = subset(bds2022, estabs_entry_rate > 20)) +
-  labs(
-    title = "Do Metro Areas With More Startups See Lower Exit Rates?",
-    subtitle = "BDS 2022: Establishment Entry vs. Exit Rates by MSA",
-    x = "Startup Rate (Establishment Entries per 100 Existing)",
-    y = "Exit Rate (Establishment Exits per 100 Existing)",
-    caption = "Source: U.S. Census Bureau BDS 2022"
-  ) +
-  theme_minimal()
 ```
 
 ```{r, fig.width=16, fig.height=8}
@@ -98,10 +80,6 @@ Establishment entry rates vary amongst different metropolitan areas. We obtained
 ```{r}
 # Load total population data (B01003)
 pop_raw <- read_csv("cbsa-est2024-alldata-char.csv")
-
-# Clean and select relevant columns
-library(readr)
-library(dplyr)
 
 # Define the mapping of AGEGRP codes to age ranges
 age_group_map <- c(
@@ -151,9 +129,6 @@ pop_clean <- pop_raw %>%
 ```
 
 ```{r, fig.width=14, fig.height=8}
-library(dplyr)
-library(ggplot2)
-library(tidyr)
 library(scales)
 
 # Step 1: Total population per CBSA, NAME, YEAR (sum across age groups)
@@ -246,8 +221,6 @@ final_table <- final_table %>%
 ```
 
 ```{r, fig.width=14, fig.height=8}
-library(dplyr)
-library(ggplot2)
 
 # Calculate median PERINCREASE for the entire dataset
 median_value <- median(final_table$PERINCREASE, na.rm = TRUE)
