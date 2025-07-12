@@ -73,7 +73,7 @@ ggplot(aes(x = estabs_entry_rate, y = estabs_exit_rate, label = msa_name)) +
   theme_minimal()
 ```
 
-
+Understanding economic growth and how to manipulate it becomes increasingly important as societies aim to develop. Using data from the US Census Bureau, I aim to explore the effect of establishment entry rates to establishment exit rates and job growths in different areas of the US in 2022. There is a moderately strong linear correlation between establishment entry rate and exit rate, meaning that a higher entry rate will correlate with a higher exit rate. Thus, despite having a high establishment entry rate that would indicate economic growth, establishments would also increasingly leave that economy. One way to explain this is older shops closing down, and new shops taking their place.
 
 ```{r}
 library(tidyverse)
@@ -113,10 +113,12 @@ p2 <- ggplot(plot_data, aes(x = estabs_entry_rate, y = job_creation_rate_births)
 p1
 ```
 
-A linear trend
+A strong linear trend is observed between establishment entry rate and job creation rate. As entry rate increases, the overall job creation rate of the area also increases. Sheridan, WY, the right-most point, has a job creation rate slightly below than what the model predicts, but not too far off.
 
 ## Plot 3
 ```{r}
 # Display plots
 p2
 ```
+
+Once again, a very stron glinear trend is observed between entry rate and job creation rate, but this time the job creation rate is solely from those new establishments. As entry rate increases, it is self explanatory why the new job creation rate also increases.

@@ -14,27 +14,6 @@
     "text": "Establishment entry rates vary amongst different metropolitan areas within the United States. I obtained a dataset containing business dynamics data from the US Census Bureau, including the 2022 establishment entry and exit rates for each metropolitan area. This records the number of new shops, startups, or franchise buildings divided by the total number of establishments in that area during 2022. I sought to use this data to find the metropolitan areas with the highest rate. Sheridan, Wyoming is a high outlier for establishment entry rates, with an over 6% increase from the second highest, while the rest of the top 20 metropolitan area entry rates don’t differ by more than 2.2%."
   },
   {
-    "objectID": "index.html#plot",
-    "href": "index.html#plot",
-    "title": "New Businesses in Different Areas",
-    "section": "",
-    "text": "Description: Establishment entry rates vary amongst different metropolitan areas. We obtained a dataset containing business dynamics data from the US Census Bureau, including the 2022 establishment entry and exit rates for each metropolitan area. This records the number of new shops, startups, or franchise buildings divided by the total number of establishments in that area during 2022. We seek to use this data to find the metropolitan areas with the highest rate. Sheridan, Wyoming is a high outlier for establishment entry rates, with an over 6% increase from the second highest, while the rest of the top 20 metropolitan area entry rates don’t differ by more than 2.2%."
-  },
-  {
-    "objectID": "model.html",
-    "href": "model.html",
-    "title": "Mathematical Models",
-    "section": "",
-    "text": "Regression Model Coefficients\n\n\n\n\n\n\n\n\n\n\nModel\nTerm\nEstimate\nStd. Error\nt value\np value\n\n\n\n\nPlot 1: Establishment Exit Rate ~ Establishment Entry Rate\nIntercept\n5.4014\n0.1707\n31.6385\n0.000\n\n\nPlot 1: Establishment Exit Rate ~ Establishment Entry Rate\nEstablishment Entry Rate\n0.3358\n0.0172\n19.5614\n0.000\n\n\nPlot 2: Net Job Creation Rate ~ Establishment Entry Rate\nIntercept\n-3.5160\n0.5545\n-6.3408\n0.000\n\n\nPlot 2: Net Job Creation Rate ~ Establishment Entry Rate\nEstablishment Entry Rate\n0.7019\n0.0558\n12.5902\n0.000\n\n\nPlot 3: Job Creation Rate (Births) ~ Establishment Entry Rate\nIntercept\n-0.3006\n0.2323\n-1.2939\n0.196\n\n\nPlot 3: Job Creation Rate (Births) ~ Establishment Entry Rate\nEstablishment Entry Rate\n0.4431\n0.0234\n18.9658\n0.000"
-  },
-  {
-    "objectID": "sources.html",
-    "href": "sources.html",
-    "title": "Sources",
-    "section": "",
-    "text": "US Census Bureau 2022 Business Dynamics Statistics Dataset (MSA)\nUS Census Bureau Metropolitan Area Code and Area Name (Mar. 2020)\nUS Census Bureau Annual Metropolitan and Micropolitan Statistical Area Resident Population Estimates by Age, Sex, Race, and Hispanic Origin for the United States: April 1, 2020 to July 1, 2024 (CBSA-EST2024-ALLDATA-CHAR)\nUS Census Bureau Building Permits by CBSA 2019 - Present\nAnnual Residential Housing Units Authorized by Building Permits For Wyoming and Counties: 1987 to 2024\nWe obtained the data by using the US Census Bureau Datasets. From those datasets, we converted them to csv files and added them to the project. We did not have to wrangle the data much, only changing column names for ease of use as well as eliminating duplicate data. We also dropped data that had any not available information."
-  },
-  {
     "objectID": "index.html#explaining-sheridan-wy",
     "href": "index.html#explaining-sheridan-wy",
     "title": "Introduction",
@@ -42,32 +21,11 @@
     "text": "Explaining Sheridan, WY\n\n\n\n\n\n\n\n\n\nPlotting 2 more graphs, I aim to explain the intriguing outlier of Sheridan, Wyoming. Some common factors that influence establishment entry rates in an area are their population growth and rate of increased building permits in recent years. The plots show that Sheridan was not within the top 10 for either metric. However, Sheridan was well above the median rate for both population growth and building permit rate of increase. This indicates that Sheridan’s high establishment entry rate was likely due to a multitude of factors, which can be further explored."
   },
   {
-    "objectID": "index2.html",
-    "href": "index2.html",
-    "title": "Establishment Entry Rate",
+    "objectID": "model.html",
+    "href": "model.html",
+    "title": "Mathematical Models",
     "section": "",
-    "text": "NULL"
-  },
-  {
-    "objectID": "index2.html#job-impacts",
-    "href": "index2.html#job-impacts",
-    "title": "Establishment Entry Rate",
-    "section": "Job Impacts",
-    "text": "Job Impacts"
-  },
-  {
-    "objectID": "index2.html#plot-2",
-    "href": "index2.html#plot-2",
-    "title": "Establishment Entry Rate",
-    "section": "Plot 2",
-    "text": "Plot 2\n\n\n\n\n\n\n\n\n\nA linear trend"
-  },
-  {
-    "objectID": "index2.html#plot-3",
-    "href": "index2.html#plot-3",
-    "title": "Establishment Entry Rate",
-    "section": "Plot 3",
-    "text": "Plot 3"
+    "text": "Regression Model Coefficients\n\n\n\n\n\n\n\n\n\n\nModel\nTerm\nEstimate\nStd. Error\nt value\np value\n\n\n\n\nPlot 1: Establishment Exit Rate ~ Establishment Entry Rate\nIntercept\n5.4014\n0.1707\n31.6385\n0.000\n\n\nPlot 1: Establishment Exit Rate ~ Establishment Entry Rate\nEstablishment Entry Rate\n0.3358\n0.0172\n19.5614\n0.000\n\n\nPlot 2: Net Job Creation Rate ~ Establishment Entry Rate\nIntercept\n-3.5160\n0.5545\n-6.3408\n0.000\n\n\nPlot 2: Net Job Creation Rate ~ Establishment Entry Rate\nEstablishment Entry Rate\n0.7019\n0.0558\n12.5902\n0.000\n\n\nPlot 3: Job Creation Rate (Births) ~ Establishment Entry Rate\nIntercept\n-0.3006\n0.2323\n-1.2939\n0.196\n\n\nPlot 3: Job Creation Rate (Births) ~ Establishment Entry Rate\nEstablishment Entry Rate\n0.4431\n0.0234\n18.9658\n0.000"
   },
   {
     "objectID": "model.html#table",
@@ -82,5 +40,40 @@
     "title": "Mathematical Models",
     "section": "Models",
     "text": "Models\nModel 1 (for plot 1) \\[\n\\text{estabs\\_exit\\_rate}_i = \\beta_0 + \\beta_1 \\cdot \\text{estabs\\_entry\\_rate}_i + \\epsilon_i\n\\]\nModel 2 (for plot 2) \\[\n\\text{net\\_job\\_creation\\_rate}_i = \\beta_0 + \\beta_1 \\cdot \\text{estabs\\_entry\\_rate}_i + \\epsilon_i\n\\]\nModel 3 (for plot 3) \\[\n\\text{job\\_creation\\_rate\\_births}_i = \\beta_0 + \\beta_1 \\cdot \\text{estabs\\_entry\\_rate}_i + \\epsilon_i\n\\]\nThe first model examines the relationship between the establishment entry rate and the establishment entry rate. It is specified as a simple linear regression where the exit rate for observation 𝑖 is modeled as a function of a constant intercept term \\(\\beta_0\\), the establishment entry rate multiplied by its slope coefficient \\(\\beta_1\\), and a random error term \\(\\epsilon_i\\), capturing unexplained variation. This model quantifies how changes in the rate at which new establishments enter the market are associated with changes in the rate at which existing establishment leave the market.\nThe second and third models similarly use a linear regression framework to relate the net job creation rate and job creation rate from births to the establishment entry rate. Here, for both, the dependent variable is the job creation rate attributed specifically to new business births, modeled as a linear function of the establishment entry rate, an intercept, and a random error term. All models assume linearity and normally distributed residuals, providing a basis to estimate and test the statistical significance of the association between business entry dynamics and employment growth."
+  },
+  {
+    "objectID": "sources.html",
+    "href": "sources.html",
+    "title": "Sources",
+    "section": "",
+    "text": "US Census Bureau 2022 Business Dynamics Statistics Dataset (MSA)\nUS Census Bureau Metropolitan Area Code and Area Name (Mar. 2020)\nUS Census Bureau Annual Metropolitan and Micropolitan Statistical Area Resident Population Estimates by Age, Sex, Race, and Hispanic Origin for the United States: April 1, 2020 to July 1, 2024 (CBSA-EST2024-ALLDATA-CHAR)\nUS Census Bureau Building Permits by CBSA 2019 - Present\nAnnual Residential Housing Units Authorized by Building Permits For Wyoming and Counties: 1987 to 2024\nWe obtained the data by using the US Census Bureau Datasets. From those datasets, we converted them to csv files and added them to the project. We did not have to wrangle the data much, only changing column names for ease of use as well as eliminating duplicate data. We also dropped data that had any not available information."
+  },
+  {
+    "objectID": "index2.html#plot-2",
+    "href": "index2.html#plot-2",
+    "title": "Establishment Entry Rate",
+    "section": "Plot 2",
+    "text": "Plot 2\n\n\n\n\n\n\n\n\n\nA strong linear trend is observed between establishment entry rate and job creation rate. As entry rate increases, the overall job creation rate of the area also increases. Sheridan, WY, the right-most point, has a job creation rate slightly below than what the model predicts, but not too far off."
+  },
+  {
+    "objectID": "index2.html#plot-3",
+    "href": "index2.html#plot-3",
+    "title": "Establishment Entry Rate",
+    "section": "Plot 3",
+    "text": "Plot 3\n\n\n\n\n\n\n\n\n\nOnce again, a very stron glinear trend is observed between entry rate and job creation rate, but this time the job creation rate is solely from those new establishments. As entry rate increases, it is self explanatory why the new job creation rate also increases."
+  },
+  {
+    "objectID": "index2.html",
+    "href": "index2.html",
+    "title": "Establishment Entry Rate",
+    "section": "",
+    "text": "Understanding economic growth and how to manipulate it becomes increasingly important as societies aim to develop. Using data from the US Census Bureau, I aim to explore the effect of establishment entry rates to establishment exit rates and job growths in different areas of the US in 2022. There is a moderately strong linear correlation between establishment entry rate and exit rate, meaning that a higher entry rate will correlate with a higher exit rate. Thus, despite having a high establishment entry rate that would indicate economic growth, establishments would also increasingly leave that economy. One way to explain this is older shops closing down, and new shops taking their place."
+  },
+  {
+    "objectID": "index2.html#plot-1",
+    "href": "index2.html#plot-1",
+    "title": "Establishment Entry Rate",
+    "section": "",
+    "text": "Understanding economic growth and how to manipulate it becomes increasingly important as societies aim to develop. Using data from the US Census Bureau, I aim to explore the effect of establishment entry rates to establishment exit rates and job growths in different areas of the US in 2022. There is a moderately strong linear correlation between establishment entry rate and exit rate, meaning that a higher entry rate will correlate with a higher exit rate. Thus, despite having a high establishment entry rate that would indicate economic growth, establishments would also increasingly leave that economy. One way to explain this is older shops closing down, and new shops taking their place."
   }
 ]
